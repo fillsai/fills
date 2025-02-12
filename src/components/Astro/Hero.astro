@@ -8,11 +8,19 @@ import { Icon } from 'astro-icon/components'
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="pt-32 pb-12 md:pt-40 md:pb-20">
       <div class="text-center pb-12 md:pb-16">
-        <p class="text-xl text-purple-500 mb-4" data-aos="zoom-y-out">
-          Fills AI
-        </p>
+        <!-- Fills AI Text -->
+        <div 
+          class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-8" 
+          data-aos="zoom-y-out"
+        >
+          <svg class="handwriting mx-auto" viewBox="0 0 600 200">
+            <text text-anchor="middle" x="300" y="150" class="text-path">Fills Ai</text>
+          </svg>
+        </div>
+
+        <!-- Main Title -->
         <h1 
-          class="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4" 
+          class="text-4xl md:text-5xl font-extrabold leading-tighter tracking-tighter mb-4" 
           data-aos="zoom-y-out"
           style="background: linear-gradient(to right, #c084fc, #818cf8, #38bdf8);
                  -webkit-background-clip: text;
@@ -113,6 +121,163 @@ import { Icon } from 'astro-icon/components'
 </section>
 
 <style>
+    @font-face {
+        font-family: 'Dancing Script';
+        src: url('/fonts/DancingScript-Bold.woff2') format('woff2');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    .handwriting {
+        width: 100%;
+        height: auto;
+        max-width: 800px;
+    }
+
+    .text-path {
+        font-family: 'Dancing Script', cursive;
+        font-size: 120px;
+        fill: none;
+        stroke: url(#gradient);
+        stroke-width: 2;
+        stroke-dasharray: 900;
+        stroke-dashoffset: 900;
+        animation: write 3s ease forwards;
+    }
+
+    @keyframes write {
+        to {
+            stroke-dashoffset: 0;
+        }
+    }
+
+    svg {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Add gradient definition */
+    .handwriting defs linearGradient stop:first-child {
+        stop-color: #c084fc;
+    }
+    .handwriting defs linearGradient stop:last-child {
+        stop-color: #818cf8;
+    }
+
+    @font-face {
+        font-family: 'Cal Sans';
+        src: url('/fonts/CalSans-SemiBold.woff2') format('woff2');
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    .font-cal {
+        font-family: 'Cal Sans', sans-serif;
+    }
+
+    .writing-animation {
+        position: relative;
+        width: fit-content;
+        margin: 0 auto;
+    }
+
+    .writing-animation::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        animation: writeText 2s steps(7) forwards;
+    }
+
+    .writing-animation::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 2px;
+        height: 100%;
+        background: #a855f7;
+        animation: cursorBlink 0.8s steps(2) infinite,
+                   writeText 2s steps(7) forwards;
+    }
+
+    @keyframes writeText {
+        to {
+            width: 0;
+        }
+    }
+
+    @keyframes cursorBlink {
+        0%, 100% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideUp {
+        0% {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+
+    .animate-fade-in {
+        animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    .animate-slide-up {
+        opacity: 0;
+        animation: slideUp 0.5s ease-out forwards;
+    }
+
+    .animation-delay-100 { animation-delay: 0.1s; }
+    .animation-delay-200 { animation-delay: 0.2s; }
+    .animation-delay-300 { animation-delay: 0.3s; }
+    .animation-delay-400 { animation-delay: 0.4s; }
+    .animation-delay-500 { animation-delay: 0.5s; }
+    .animation-delay-600 { animation-delay: 0.6s; }
+    .animation-delay-700 { animation-delay: 0.7s; }
+
+    @media (max-width: 640px) {
+        .text-2xl {
+            font-size: 1.5rem;
+        }
+    }
+
+    @media (min-width: 641px) and (max-width: 768px) {
+        .sm\:text-3xl {
+            font-size: 1.875rem;
+        }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .md\:text-4xl {
+            font-size: 2.25rem;
+        }
+    }
+
+    @media (min-width: 1025px) {
+        .lg\:text-5xl {
+            font-size: 3rem;
+        }
+    }
+
     @keyframes float {
         0%, 100% { transform: translate(0, 0); }
         50% { transform: translate(-10px, 10px); }
@@ -140,22 +305,6 @@ import { Icon } from 'astro-icon/components'
         animation: fade-up 1s ease forwards;
     }
 
-    .animation-delay-100 {
-        animation-delay: 100ms;
-    }
-
-    .animation-delay-200 {
-        animation-delay: 200ms;
-    }
-
-    .animation-delay-300 {
-        animation-delay: 300ms;
-    }
-
-    .animation-delay-400 {
-        animation-delay: 400ms;
-    }
-
     .animation-delay-1000 {
         animation-delay: 1000ms;
     }
@@ -173,3 +322,13 @@ import { Icon } from 'astro-icon/components'
         transform: translateZ(20px);
     }
 </style>
+
+<svg width="0" height="0">
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#c084fc" />
+      <stop offset="50%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+  </defs>
+</svg>
