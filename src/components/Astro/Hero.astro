@@ -13,16 +13,15 @@ import { Icon } from 'astro-icon/components'
           class="md:hidden text-4xl sm:text-5xl mb-8" 
           data-aos="zoom-y-out"
         >
-          <svg class="handwriting mx-auto" viewBox="0 0 600 200">
-            <defs>
-              <linearGradient id="gradient-mobile" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#c084fc" />
-                <stop offset="50%" stop-color="#818cf8" />
-                <stop offset="100%" stop-color="#38bdf8" />
-              </linearGradient>
-            </defs>
-            <text text-anchor="middle" x="300" y="150" class="text-path-mobile">Fills Ai</text>
-          </svg>
+          <h1 
+            class="font-dancing-script text-6xl sm:text-7xl"
+            style="background: linear-gradient(to right, #c084fc, #818cf8, #38bdf8);
+                   -webkit-background-clip: text;
+                   -webkit-text-fill-color: transparent;
+                   background-clip: text;"
+          >
+            Fills Ai
+          </h1>
         </div>
 
         <!-- Desktop View (Hidden on mobile) -->
@@ -372,6 +371,10 @@ import { Icon } from 'astro-icon/components'
             font-size: 60px;
             stroke-width: 1.5;
         }
+    }
+
+    .font-dancing-script {
+        font-family: 'Dancing Script', cursive;
     }
 </style>
 
