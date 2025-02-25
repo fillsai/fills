@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import ReactMarkdown from 'react-markdown';
 
 interface Message {
   id: number;
@@ -37,6 +39,40 @@ const InteractiveShowcase: React.FC = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
+  // Initialize Gemini AI
+  const genAI = new GoogleGenerativeAI("AIzaSyBtbun2P1TvbLDwhNUT-fwOJcJuymOZwiI");
+  const model = genAI.getGenerativeModel({
+    model: "gemini-2.0-flash-exp",
+    generationConfig: {
+      temperature: 1,
+      topP: 0.95,
+      topK: 40,
+      maxOutputTokens: 8192,
+    }
+  });
+
+  // Add chat session ref
+  const chatSessionRef = useRef<any>(null);
+
+  // Initialize chat session
+  useEffect(() => {
+    const initChat = async () => {
+      chatSessionRef.current = model.startChat({
+        history: [
+          {
+            role: "user",
+            parts: [{ text: "hi, what all are available services" }],
+          },
+          {
+            role: "model",
+            parts: [{ text: messages[0].content }],
+          },
+        ],
+      });
+    };
+    initChat();
+  }, []);
+
   const scrollToBottom = () => {
     if (initialLoad) {
       setInitialLoad(false);
@@ -57,7 +93,7 @@ const InteractiveShowcase: React.FC = () => {
     scrollToBottom();
   }, [messages]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newMessage.trim()) return;
 
@@ -70,18 +106,51 @@ const InteractiveShowcase: React.FC = () => {
     setMessages(prev => [...prev, userMessage]);
     setNewMessage('');
 
-    // Only send the prepared message once after the first user input
-    if (!hasRespondedToFirstMessage) {
-      setTimeout(() => {
-        const assistantMessage: Message = {
-          id: messages.length + 2,
-          content: "Thanks for your interest! Please visit our projects page to see detailed case studies of our AI solutions, or contact us directly for a consultation.",
-          sender: 'assistant'
-        };
-        setMessages(prev => [...prev, assistantMessage]);
-        setHasRespondedToFirstMessage(true);
-      }, 1000);
+    try {
+      // Get AI response
+      const result = await chatSessionRef.current.sendMessage(newMessage);
+      const response = await result.response.text();
+
+      // Add AI response
+      const assistantMessage: Message = {
+        id: messages.length + 2,
+        content: response,
+        sender: 'assistant'
+      };
+      setMessages(prev => [...prev, assistantMessage]);
+    } catch (error) {
+      console.error('Error getting AI response:', error);
+      // Add error message
+      const errorMessage: Message = {
+        id: messages.length + 2,
+        content: "I apologize, but I'm having trouble connecting right now. Please try again later.",
+        sender: 'assistant'
+      };
+      setMessages(prev => [...prev, errorMessage]);
     }
+  };
+
+  // Render message content with markdown
+  const renderMessageContent = (content: string) => {
+    return (
+      <ReactMarkdown
+        components={{
+          h1: ({node, ...props}) => <h1 className="text-xl font-bold mb-2" {...props} />,
+          h2: ({node, ...props}) => <h2 className="text-lg font-bold mb-2" {...props} />,
+          h3: ({node, ...props}) => <h3 className="text-md font-bold mb-2" {...props} />,
+          p: ({node, ...props}) => <p className="mb-2" {...props} />,
+          ul: ({node, ...props}) => <ul className="list-disc ml-4 mb-2" {...props} />,
+          ol: ({node, ...props}) => <ol className="list-decimal ml-4 mb-2" {...props} />,
+          li: ({node, ...props}) => <li className="mb-1" {...props} />,
+          strong: ({node, ...props}) => <strong className="font-bold" {...props} />,
+          em: ({node, ...props}) => <em className="italic" {...props} />,
+          code: ({node, ...props}) => <code className="bg-gray-800 px-1 rounded" {...props} />,
+          blockquote: ({node, ...props}) => <blockquote className="border-l-4 border-gray-500 pl-4 my-2" {...props} />,
+        }}
+      >
+        {content}
+      </ReactMarkdown>
+    );
   };
 
   return (
@@ -126,7 +195,7 @@ const InteractiveShowcase: React.FC = () => {
                         : 'bg-gradient-to-r from-gray-800/80 via-gray-800/80 to-gray-800/80 backdrop-blur-sm border border-white/10'
                     }`}
                   >
-                    {message.content}
+                    {renderMessageContent(message.content)}
                   </div>
                 </motion.div>
               ))}
