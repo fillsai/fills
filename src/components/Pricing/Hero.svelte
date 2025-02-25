@@ -3,8 +3,8 @@
   import { fade, fly } from 'svelte/transition';
   import { quintOut } from 'svelte/easing';
 
-  export let headline = "Svelte + Astro = Magic";
-  export let description = "Experience the joy of Svelte's reactivity combined with Astro's performance. Write less code, build faster websites.";
+  export let headline = "Affordable AI Solutions";
+  export let description = "Fast delivery, competitive pricing, and enterprise-grade AI solutions. Choose the plan that fits your timeline and budget.";
 
   let mounted = false;
 
@@ -18,27 +18,31 @@
   };
 
   const features = [
-    { title: "Reactive by Default", description: "No more useState or useEffect. Svelte's reactive statements just work.", icon: "⚡" },
-    { title: "Zero Runtime", description: "Svelte compiles away, leaving you with vanilla JavaScript that runs at lightning speed.", icon: "🚀" },
-    { title: "Truly Magical", description: "Auto-subscriptions, built-in animations, and scoped CSS make development a breeze.", icon: "✨" }
+    { title: "Quick Delivery", description: "Get your AI solution up and running in as little as one week.", icon: "⚡" },
+    { title: "Flexible Plans", description: "Choose from weekly, monthly, or custom enterprise solutions.", icon: "🚀" },
+    { title: "Quality Assured", description: "Professional AI development with guaranteed satisfaction.", icon: "✨" }
   ];
 
-  const codeExample = `<!-- Simple Svelte Component -->
-< script>
-  let count = 0;
-  $: doubled = count * 2;
-</>
+  const codeExample = `<!-- Pricing Options -->
+Short Term: $850/week
+✓ Quick delivery
+✓ One week timeline
+✓ Full implementation
 
-<button on:click={() => count++}>
-  Count: {count}
-</button>
+Medium Term: $3000-4000/month
+✓ Comprehensive solution
+✓ Fastest possible delivery
+✓ Complete integration
 
-<p>Doubled: {doubled}</p>`;
+Enterprise: Custom pricing
+✓ Tailored solutions
+✓ Flexible timeline
+✓ Full customization`;
 
   const highlights = [
-    { title: "Lightning Fast", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-400"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>' },
-    { title: "Zero Runtime", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-400"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline><polyline points="7.5 19.79 7.5 14.6 3 12"></polyline><polyline points="21 12 16.5 14.6 16.5 19.79"></polyline><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>' },
-    { title: "Dark Mode Ready", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-400"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>' }
+    { title: "Fast Delivery", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-400"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>' },
+    { title: "Affordable", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-400"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline><polyline points="7.5 19.79 7.5 14.6 3 12"></polyline><polyline points="21 12 16.5 14.6 16.5 19.79"></polyline><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>' },
+    { title: "Enterprise Ready", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-400"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>' }
   ];
 
   onMount(() => {
@@ -64,7 +68,7 @@
               on:click={scrollToDevTools}
               class="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium rounded-lg hover:shadow-lg hover:shadow-orange-500/20 transition-all duration-300 hover:-translate-y-0.5 group"
             >
-              Try Interactive Demo
+              Plan Out
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 
                 width="20" 

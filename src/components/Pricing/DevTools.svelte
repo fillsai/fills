@@ -44,8 +44,8 @@
       <div in:slide={{ duration: 800, delay: 200 }} class="bg-gray-900/50 backdrop-blur-xl rounded-2xl border border-gray-800/50 overflow-hidden shadow-xl">
         <!-- Header -->
         <div class="border-b border-gray-800/50 p-4">
-          <h2 class="text-2xl font-semibold text-white">Svelte Developer Tools</h2>
-          <p class="text-gray-400 mt-1">Interactive examples of Svelte's reactive features</p>
+          <h2 class="text-2xl font-semibold text-white">Pricing Plans</h2>
+          <p class="text-gray-400 mt-1">Flexible options for businesses of all sizes</p>
         </div>
 
         <!-- Tabs -->
@@ -58,7 +58,7 @@
             }`}
             on:click={() => activeTab = 'state'}
           >
-            State Management
+            Short Term
           </button>
           <button
             class={`px-4 py-3 text-sm font-medium transition-colors duration-200 ${
@@ -68,7 +68,7 @@
             }`}
             on:click={() => activeTab = 'todo'}
           >
-            Todo App
+            Medium Term
           </button>
         </div>
 
@@ -77,24 +77,12 @@
           {#if activeTab === 'state'}
             <div in:fade class="space-y-6">
               <div class="space-y-4">
-                <h3 class="text-lg font-medium text-white">Reactive Counter</h3>
-                <div class="flex items-center gap-4">
-                  <button
-                    on:click={() => count--}
-                    class="px-3 py-1 rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition-colors"
-                  >
-                    -
-                  </button>
-                  <span class="text-xl text-white font-mono">{count}</span>
-                  <button
-                    on:click={() => count++}
-                    class="px-3 py-1 rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition-colors"
-                  >
-                    +
-                  </button>
+                <h3 class="text-lg font-medium text-white">Weekly Plan</h3>
+                <div class="text-gray-400">
+                  Base price: <span class="text-orange-400">$850/week</span>
                 </div>
                 <div class="text-gray-400">
-                  Doubled value (reactive): <span class="text-orange-400">{doubledCount}</span>
+                  Delivery: <span class="text-orange-400">1 week</span>
                 </div>
               </div>
 
@@ -164,6 +152,14 @@ $: doubledCount = count * 2;
                     </button>
                   </div>
                 {/each}
+              </div>
+
+              <h3 class="text-lg font-medium text-white">Monthly Plan</h3>
+              <div class="text-gray-400">
+                Starting from: <span class="text-orange-400">$3000/month</span>
+              </div>
+              <div class="text-gray-400">
+                Timeline: <span class="text-orange-400">Fastest possible delivery</span>
               </div>
             </div>
           {/if}

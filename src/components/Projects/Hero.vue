@@ -38,13 +38,13 @@
                 @click="() => activeDemo = (activeDemo % 3) + 1"
                 class="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-medium rounded-lg hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 hover:-translate-y-0.5"
               >
-                Try Demo {{ activeDemo }}
+                Choose Any {{ activeDemo === 1 ? 'Project(s)' : activeDemo === 2 ? 'Theme(s)' : 'Task(s)' }}
               </button>
               <button
                 @click="scrollToFeatures"
                 class="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-400 to-emerald-500 text-white font-medium rounded-lg hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 hover:-translate-y-0.5 group"
               >
-                View Features
+                View Projects
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
                   width="20" 
@@ -118,7 +118,7 @@
                   <div :key="activeDemo" class="pt-4 mt-2">
                     <!-- Counter Demo -->
                     <div v-if="activeDemo === 1" class="space-y-4">
-                      <h3 class="text-xl font-semibold text-emerald-400">Reactive Counter</h3>
+                      <h3 class="text-xl font-semibold text-emerald-400">Projects Completed</h3>
                       <div class="flex items-center gap-4">
                         <button 
                           @click="count--"
@@ -130,7 +130,7 @@
                           class="px-4 py-2 rounded bg-gray-700/50 hover:bg-gray-700 transition-colors"
                         >+</button>
                       </div>
-                      <p class="text-gray-400">Computed double: {{ doubled }}</p>
+                      <p class="text-gray-400">Months in Development: {{ count }}</p>
                     </div>
 
                     <!-- Color Demo -->
@@ -172,7 +172,7 @@
                 </Transition>
 
                 <div class="mt-4 text-sm text-gray-500">
-                  Demo {{ activeDemo }} of 3
+                  Showcase {{ activeDemo }} of 3
                 </div>
               </div>
 
@@ -192,8 +192,7 @@ import { ref, computed } from 'vue';
 
 // Demo State
 const activeDemo = ref(1);
-const count = ref(0);
-const doubled = computed(() => count.value * 2);
+const count = ref(8);
 const hue = ref(180);
 const tasks = ref([
   { text: 'Healthcare AI', done: true },
