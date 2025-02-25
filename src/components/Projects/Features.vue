@@ -9,9 +9,9 @@
       >
         <div class="text-center mb-8 sm:mb-16">
           <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-            Experience The Power Of Fills
+            Experience The Power
           </h2>
-          <p class="mt-3 sm:mt-4 text-lg sm:text-xl text-gray-400">Cutting-edge Projects that sets fills ai apart</p>
+          <p class="mt-3 sm:mt-4 text-lg sm:text-xl text-gray-400">Cutting-edge features that set us apart</p>
         </div>
       </Transition>
 
@@ -25,20 +25,17 @@
           <div
             v-for="(feature, index) in features"
             :key="feature.title"
-            :style="mousePos ? { 
+            :style="{ 
               transitionDelay: `${index * 200}ms`,
-              transform: mousePos[index].isHovered 
-                ? `
-                  perspective(2000px)
-                  rotateY(${mousePos[index].x * 0.05}deg)
-                  rotateX(${-mousePos[index].y * 0.05}deg)
-                  translateZ(20px)
-                  translateY(-8px)
-                `
-                : 'translateY(0px)',
-              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-            } : {}"
-            class="group relative hover:shadow-xl"
+              transform: `
+                perspective(2000px)
+                rotateY(${mousePos[index].x * 0.05}deg)
+                rotateX(${-mousePos[index].y * 0.05}deg)
+                translateZ(${mousePos[index].isHovered ? '20px' : '0px'})
+              `,
+              transition: 'transform 0.3s ease'
+            }"
+            class="group relative"
             @mousemove="handleMouseMove($event, index)"
             @mouseenter="handleMouseEnter(index)"
             @mouseleave="handleMouseLeave(index)"
@@ -47,8 +44,8 @@
             <div 
               class="absolute inset-0 bg-gradient-to-br from-emerald-500/30 via-teal-500/20 to-cyan-500/30 rounded-xl blur-xl transition-opacity duration-500"
               :style="{
-                opacity: mousePos && mousePos[index].isHovered ? 1 : 0,
-                transform: mousePos ? `translate(${mousePos[index].x * 0.1}px, ${mousePos[index].y * 0.1}px)` : ''
+                opacity: mousePos[index].isHovered ? 1 : 0,
+                transform: `translate(${mousePos[index].x * 0.1}px, ${mousePos[index].y * 0.1}px)`
               }"
             ></div>
 
@@ -59,26 +56,26 @@
               <!-- 3D floating icon -->
               <div 
                 class="h-12 w-12 sm:h-16 sm:w-16 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-400 mb-4 sm:mb-6 p-2 sm:p-3 transition-transform duration-300"
-                :style="mousePos ? {
+                :style="{
                   transform: `
                     translateZ(40px)
                     rotateY(${mousePos[index].x * 0.1}deg)
                     rotateX(${-mousePos[index].y * 0.1}deg)
                   `
-                } : {}"
+                }"
               >
                 <component :is="feature.icon" class="w-full h-full text-white" />
               </div>
 
               <!-- Text content with 3D effect -->
               <div
-                :style="mousePos ? {
+                :style="{
                   transform: `
                     translateZ(30px)
                     rotateY(${mousePos[index].x * 0.03}deg)
                     rotateX(${-mousePos[index].y * 0.03}deg)
                   `
-                } : {}"
+                }"
               >
                 <h3 class="text-xl sm:text-2xl font-semibold text-white mb-3 sm:mb-4">{{ feature.title }}</h3>
                 <p class="text-sm sm:text-base text-gray-400">{{ feature.description }}</p>
@@ -87,13 +84,13 @@
               <!-- Interactive Element with enhanced 3D -->
               <div 
                 class="mt-auto pt-4 sm:pt-6"
-                :style="mousePos ? {
+                :style="{
                   transform: `
                     translateZ(50px)
                     rotateY(${mousePos[index].x * 0.08}deg)
                     rotateX(${-mousePos[index].y * 0.08}deg)
                   `
-                } : {}"
+                }"
               >
                 <component 
                   :is="feature.interactive" 
@@ -112,20 +109,10 @@
 <script setup>
 import { ref, computed, h, onMounted } from 'vue';
 
-// Initialize mousePos with null instead of empty array
-const mousePos = ref(null);
-
-// Initialize the mousePos in onMounted
-onMounted(() => {
-  mousePos.value = Array(3).fill().map(() => ({ 
-    x: 0, 
-    y: 0, 
-    isHovered: false 
-  }));
-});
+// Mouse position for each card
+const mousePos = ref(Array(3).fill().map(() => ({ x: 0, y: 0, isHovered: false })));
 
 const handleMouseMove = (event, index) => {
-  if (!mousePos.value) return; // Add safety check
   const card = event.currentTarget;
   const rect = card.getBoundingClientRect();
   const centerX = rect.left + rect.width / 2;
@@ -136,12 +123,10 @@ const handleMouseMove = (event, index) => {
 };
 
 const handleMouseEnter = (index) => {
-  if (!mousePos.value) return; // Add safety check
   mousePos.value[index].isHovered = true;
 };
 
 const handleMouseLeave = (index) => {
-  if (!mousePos.value) return; // Add safety check
   mousePos.value[index] = { x: 0, y: 0, isHovered: false };
 };
 
@@ -306,68 +291,43 @@ const LiveDemo = {
   }
 };
 
-// Feature definitions
+// Feature definitions (reduced to 3)
 const features = [
   {
-    title: "Valmiki AI",
-    description: "An innovative AI platform that brings ancient wisdom to modern conversations, making spiritual knowledge accessible through interactive dialogue.",
+    title: "Smart Type System",
+    description: "Experience the power of Vue's intelligent type system with real-time feedback and suggestions.",
     icon: {
       template: `
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" />
         </svg>
       `
     },
     interactive: TypeWriter
   },
   {
-    title: "Medical AI Form Filler",
-    description: "Streamlining healthcare documentation with AI-powered form completion, reducing administrative burden while maintaining accuracy and compliance.",
+    title: "Dynamic Theming",
+    description: "Switch between beautiful pre-built themes or create your own with our powerful theming system.",
     icon: {
       template: `
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
         </svg>
       `
     },
     interactive: ThemeSwitcher
   },
   {
-    title: "GAP Shopping AI Assistant",
-    description: "A personalized shopping companion that helps customers find the perfect style, size, and fit while providing real-time fashion advice and recommendations.",
+    title: "Dynamic Experiences",
+    description: "Build fluid and responsive interfaces with Vue's reactive system and smooth transitions.",
     icon: {
       template: `
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
         </svg>
       `
     },
     interactive: LiveDemo
-  },
-  {
-    title: "Pet Smart AI Assistant",
-    description: "An intelligent companion for pet owners, offering personalized care advice, behavior insights, and health monitoring for their beloved animals.",
-    icon: {
-      template: `
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
-        </svg>
-      `
-    },
-    interactive: AnimatedCounter
-  },
-  {
-    title: "Williamson Sonoma AI Assistant",
-    description: "A sophisticated culinary AI that helps customers discover kitchen essentials, recipes, and cooking techniques while providing personalized shopping recommendations.",
-    icon: {
-      template: `
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.87c1.355 0 2.697.055 4.024.165C17.155 8.51 18 9.473 18 10.608v2.513m-3-4.87v-1.5m-6 1.5v-1.5m12 9.75l-1.5.75a3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0L3 16.5m15-3.38a48.474 48.474 0 00-6-.37c-2.032 0-4.034.125-6 .37m12 0c.39.049.777.102 1.163.16 1.07.16 1.837 1.094 1.837 2.175v5.17c0 .62-.504 1.124-1.125 1.124H4.125A1.125 1.125 0 013 20.625v-5.17c0-1.08.768-2.014 1.837-2.174A47.78 47.78 0 016 13.12M12.265 3.11a.375.375 0 11-.53 0L12 2.845l.265.265zm-3 0a.375.375 0 11-.53 0L9 2.845l.265.265zm6 0a.375.375 0 11-.53 0L15 2.845l.265.265z" />
-        </svg>
-      `
-    },
-    interactive: ProgressBar,
-    props: { value: 75, max: 100 }
   }
 ];
 </script>
