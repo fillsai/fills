@@ -1,175 +1,361 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// Company Information - Update these values
+const companyInfo = {
+    name: "FILLS AI CONSULTANCY",
+    legalName: "FILLS AI CONSULTANCY",
+    website: "https://www.fills.ai",
+    email: "support@fills.ai",
+    phone: "+91-XXXXXXXXXX", // Update with actual phone number
+    address: "Narsapur, Medak, Telangana - 502306, India",
+    state: "Telangana",
+    country: "India",
+    grievanceOfficer: {
+        name: "Nithin Manupati", // Update with actual grievance officer name
+        email: "grievance@fills.ai", // Update with actual email
+        designation: "Grievance Officer"
+    },
+    effectiveDate: "December 18, 2024",
+    lastUpdated: "December 18, 2024"
+};
 ---
 
-<Layout title="Refund Policy">
+<Layout title="Refund and Cancellation Policy - FILLS AI CONSULTANCY">
     <main class="relative min-h-screen overflow-hidden">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-32">
             <div class="bg-gray-900/50 backdrop-blur-sm rounded-2xl border border-gray-800/50 p-8 md:p-12">
-                <h1 class="text-4xl font-bold text-center mb-8" 
+                <h1 class="text-4xl font-bold text-center mb-4" 
                     style="background: linear-gradient(to right, #c084fc, #818cf8, #38bdf8);
                            -webkit-background-clip: text;
                            -webkit-text-fill-color: transparent;
                            background-clip: text;">
                     Refund and Cancellation Policy
                 </h1>
+                
+                <p class="text-center text-gray-400 mb-8">
+                    Effective Date: {companyInfo.effectiveDate} | Last Updated: {companyInfo.lastUpdated}
+                </p>
 
                 <div class="prose prose-invert max-w-none">
                     <div class="text-gray-300 space-y-6">
+                        
+                        <!-- Company Information Banner -->
+                        <div class="bg-purple-900/30 border border-purple-600/30 rounded-lg p-6 mb-8">
+                            <h2 class="text-xl font-bold text-white mb-3">Merchant Information</h2>
+                            <div class="grid md:grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <p><strong class="text-purple-300">Legal Entity:</strong> {companyInfo.legalName}</p>
+                                    <p><strong class="text-purple-300">Website:</strong> <a href={companyInfo.website} class="text-purple-400 hover:text-purple-300">{companyInfo.website}</a></p>
+                                </div>
+                                <div>
+                                    <p><strong class="text-purple-300">Email:</strong> <a href={`mailto:${companyInfo.email}`} class="text-purple-400 hover:text-purple-300">{companyInfo.email}</a></p>
+                                    <p><strong class="text-purple-300">Address:</strong> {companyInfo.address}</p>
+                                </div>
+                            </div>
+                        </div>
+
                         <section>
-                            <p class="mb-6 text-lg">
-                                This refund and cancellation policy outlines how you can cancel or seek a refund for a product/service that you have purchased through the Platform. Under this policy:
+                            <h2 class="text-2xl font-bold text-white mb-4">1. Introduction</h2>
+                            <p class="mb-4">
+                                This Refund and Cancellation Policy ("Policy") outlines the terms and conditions under which you may cancel or seek a refund for products or services purchased through our Platform at <a href={companyInfo.website} class="text-purple-400 hover:text-purple-300">{companyInfo.website}</a>.
+                            </p>
+                            <p class="mb-4">
+                                {companyInfo.name} is committed to ensuring customer satisfaction. We process all refunds in compliance with the Reserve Bank of India (RBI) guidelines and applicable consumer protection laws.
+                            </p>
+                            <p class="mb-4 font-semibold text-purple-300">
+                                BY MAKING A PURCHASE ON OUR PLATFORM, YOU AGREE TO THE TERMS OF THIS REFUND AND CANCELLATION POLICY.
                             </p>
                         </section>
 
                         <section>
-                            <h2 class="text-2xl font-bold text-white mb-4">Cancellation Policy</h2>
+                            <h2 class="text-2xl font-bold text-white mb-4">2. Cancellation Policy</h2>
                             
                             <div class="bg-gray-800/50 rounded-lg p-6 border border-gray-700 mb-6">
-                                <h3 class="text-xl font-bold text-purple-300 mb-3">Cancellation Timeline</h3>
-                                <p class="mb-4">
-                                    Cancellations will only be considered if the request is made <strong class="text-white">within 7 days of placing the order</strong>. However, cancellation requests may not be entertained if:
-                                </p>
-                                <ul class="list-disc pl-6 space-y-2">
-                                    <li>The orders have been communicated to sellers/merchants listed on the Platform</li>
-                                    <li>The service delivery process has been initiated</li>
-                                    <li>The product is out for delivery</li>
-                                </ul>
-                                <p class="mt-4">
-                                    In such events, you may choose to reject the product at the doorstep.
-                                </p>
+                                <h3 class="text-xl font-bold text-purple-300 mb-4">2.1 Cancellation Timeline</h3>
+                                
+                                <div class="overflow-x-auto">
+                                    <table class="w-full text-sm">
+                                        <thead>
+                                            <tr class="border-b border-gray-600">
+                                                <th class="text-left py-3 text-purple-300">Service Type</th>
+                                                <th class="text-left py-3 text-purple-300">Cancellation Window</th>
+                                                <th class="text-left py-3 text-purple-300">Cancellation Fee</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-gray-700">
+                                            <tr>
+                                                <td class="py-3">Digital Products</td>
+                                                <td class="py-3">Within 7 days of purchase (before delivery)</td>
+                                                <td class="py-3">None</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-3">Consulting Services</td>
+                                                <td class="py-3">Before service commencement</td>
+                                                <td class="py-3">None</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-3">Custom Development</td>
+                                                <td class="py-3">Before project kickoff</td>
+                                                <td class="py-3">None</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-3">Subscription Services</td>
+                                                <td class="py-3">Before next billing cycle</td>
+                                                <td class="py-3">None</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
 
-                            <div class="bg-blue-900/20 border border-blue-600/30 rounded-lg p-4 mb-6">
-                                <p class="text-blue-200">
-                                    <strong>Note:</strong> FILLS AI CONSULTANCY does not accept cancellation requests for services that have already been initiated or AI consulting engagements that are in progress.
-                                </p>
-                            </div>
-                        </section>
-
-                        <section>
-                            <h2 class="text-2xl font-bold text-white mb-4">Refund Policy</h2>
-                            
                             <div class="space-y-4">
                                 <div class="border-l-4 border-purple-500 pl-4">
-                                    <h3 class="text-lg font-bold text-white mb-2">Service Quality Issues</h3>
-                                    <p class="mb-2">
-                                        The refund/replacement can be made if the user establishes that the quality of the service delivered is not as per the agreed specifications or service level agreement.
-                                    </p>
-                                    <p class="text-sm text-gray-400">
-                                        This should be reported <strong>within 7 days of receipt of services</strong>.
-                                    </p>
+                                    <h3 class="text-lg font-bold text-white mb-2">2.2 Cancellation Conditions</h3>
+                                    <p class="mb-2">Cancellation requests will be considered if:</p>
+                                    <ul class="list-disc pl-6 space-y-1">
+                                        <li>The request is made within <strong>7 days</strong> of placing the order</li>
+                                        <li>The service has not yet been initiated or delivered</li>
+                                        <li>The product has not been downloaded or accessed</li>
+                                    </ul>
+                                </div>
+
+                                <div class="border-l-4 border-yellow-500 pl-4">
+                                    <h3 class="text-lg font-bold text-yellow-300 mb-2">2.3 Cancellation Restrictions</h3>
+                                    <p class="mb-2 text-yellow-100">Cancellation requests may NOT be entertained if:</p>
+                                    <ul class="list-disc pl-6 space-y-1 text-yellow-100">
+                                        <li>The service delivery has been initiated</li>
+                                        <li>Digital products have been delivered or accessed</li>
+                                        <li>Custom development work has commenced</li>
+                                        <li>The cancellation window has expired</li>
+                                        <li>The product/service was purchased during a promotional sale (unless defective)</li>
+                                    </ul>
                                 </div>
 
                                 <div class="border-l-4 border-purple-500 pl-4">
-                                    <h3 class="text-lg font-bold text-white mb-2">Reporting Issues</h3>
-                                    <p class="mb-2">
-                                        In case of receipt of damaged, defective items, or if you feel that the service received is not as described or as per your expectations, please report to our customer service team.
-                                    </p>
-                                    <p class="mb-2">
-                                        The request would be entertained once we have checked and determined the same at our end.
-                                    </p>
-                                    <p class="text-sm text-gray-400">
-                                        This must be brought to our notice <strong>within 7 days of receiving the product/service</strong>.
-                                    </p>
+                                    <h3 class="text-lg font-bold text-white mb-2">2.4 How to Cancel</h3>
+                                    <p class="mb-2">To request a cancellation:</p>
+                                    <ol class="list-decimal pl-6 space-y-1">
+                                        <li>Email us at <a href={`mailto:${companyInfo.email}`} class="text-purple-400 hover:text-purple-300">{companyInfo.email}</a></li>
+                                        <li>Include your Order ID, registered email, and reason for cancellation</li>
+                                        <li>Subject line: "Cancellation Request - [Order ID]"</li>
+                                        <li>We will acknowledge your request within 24-48 hours</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <h2 class="text-2xl font-bold text-white mb-4">3. Refund Policy</h2>
+                            
+                            <div class="bg-blue-900/20 border border-blue-600/30 rounded-lg p-6 mb-6">
+                                <h3 class="text-xl font-bold text-blue-300 mb-3">Payment Gateway Refunds</h3>
+                                <p class="text-blue-100 mb-3">
+                                    All refunds are processed through <strong>PhonePe Payment Gateway</strong> in compliance with RBI guidelines. The refund will be credited to the original payment method used during purchase.
+                                </p>
+                                <p class="text-sm text-blue-200">
+                                    <strong>Note:</strong> Refund processing time may vary depending on your bank or payment provider.
+                                </p>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-purple-500 pl-4">
+                                    <h3 class="text-lg font-bold text-white mb-2">3.1 Refund Eligibility</h3>
+                                    <p class="mb-2">You are eligible for a refund if:</p>
+                                    <ul class="list-disc pl-6 space-y-1">
+                                        <li>The service/product delivered does not match the agreed specifications</li>
+                                        <li>There is a defect in the service quality as per the service level agreement</li>
+                                        <li>The service was not delivered within the agreed timeline (where applicable)</li>
+                                        <li>Technical issues on our end prevented service delivery</li>
+                                        <li>Duplicate payment was made for the same order</li>
+                                    </ul>
                                 </div>
 
                                 <div class="border-l-4 border-purple-500 pl-4">
-                                    <h3 class="text-lg font-bold text-white mb-2">Third-Party Products with Warranty</h3>
-                                    <p>
-                                        In case of complaints regarding products or services that come with a warranty from third-party providers or manufacturers, please refer the issue directly to them.
-                                    </p>
+                                    <h3 class="text-lg font-bold text-white mb-2">3.2 Refund Timeline</h3>
+                                    <div class="bg-gray-800/50 rounded-lg p-4 border border-gray-700 mt-2">
+                                        <ul class="space-y-2">
+                                            <li><strong class="text-white">Request Review:</strong> 2-3 business days</li>
+                                            <li><strong class="text-white">Refund Approval/Rejection:</strong> Within 5 business days of request</li>
+                                            <li><strong class="text-white">Refund Processing:</strong> 5-7 business days after approval</li>
+                                            <li><strong class="text-white">Credit to Account:</strong> 5-10 business days (depending on bank/card issuer)</li>
+                                        </ul>
+                                        <p class="text-sm text-gray-400 mt-3">
+                                            <strong>Total Time:</strong> Approximately 15-20 business days from request to credit
+                                        </p>
+                                    </div>
                                 </div>
 
                                 <div class="border-l-4 border-purple-500 pl-4">
-                                    <h3 class="text-lg font-bold text-white mb-2">Refund Processing Time</h3>
-                                    <p>
-                                        In case of any refunds approved by FILLS AI CONSULTANCY, it will take <strong class="text-white">7 business days</strong> for the refund to be processed to you.
+                                    <h3 class="text-lg font-bold text-white mb-2">3.3 Refund Amount</h3>
+                                    <p class="mb-2">The refund amount will be calculated as follows:</p>
+                                    <ul class="list-disc pl-6 space-y-1">
+                                        <li><strong>Full Refund:</strong> For cancellations before service delivery</li>
+                                        <li><strong>Partial Refund:</strong> For partially delivered services (based on work completed)</li>
+                                        <li><strong>Pro-rated Refund:</strong> For subscription cancellations (based on unused period)</li>
+                                    </ul>
+                                    <p class="text-sm text-gray-400 mt-2">
+                                        Note: Payment gateway transaction fees (if any) are non-refundable.
                                     </p>
                                 </div>
                             </div>
                         </section>
 
                         <section>
-                            <h2 class="text-2xl font-bold text-white mb-4">AI Consulting Services</h2>
-                            <div class="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
-                                <p class="mb-4">
-                                    For AI consulting and development services, the following additional terms apply:
-                                </p>
-                                <ul class="list-disc pl-6 space-y-3">
+                            <h2 class="text-2xl font-bold text-white mb-4">4. Non-Refundable Items/Services</h2>
+                            
+                            <div class="bg-yellow-900/20 border border-yellow-600/30 rounded-lg p-6">
+                                <p class="text-yellow-200 mb-4 font-semibold">The following are NOT eligible for refunds:</p>
+                                <ul class="list-disc pl-6 space-y-2 text-yellow-100">
                                     <li>
-                                        <strong>Initial Consultation:</strong> Free consultation calls are non-refundable as they represent time and expertise provided.
+                                        <strong>Completed Services:</strong> AI consulting and development services that have been delivered and accepted
                                     </li>
                                     <li>
-                                        <strong>Project Deposits:</strong> Project deposits paid at the start of an engagement are non-refundable once work has commenced.
+                                        <strong>Custom Development:</strong> Bespoke solutions that have been developed as per specifications
                                     </li>
                                     <li>
-                                        <strong>Milestone-Based Projects:</strong> For projects with milestone-based payments, refunds will be calculated based on completed milestones and work delivered.
+                                        <strong>Digital Products (Post-Download):</strong> Software, reports, or documentation after they have been accessed or downloaded
                                     </li>
                                     <li>
-                                        <strong>Subscription Services:</strong> Cancellations for subscription-based services must be made before the next billing cycle to avoid charges.
+                                        <strong>Training Sessions:</strong> Completed training, workshops, or consultation calls
+                                    </li>
+                                    <li>
+                                        <strong>API Access:</strong> Services where API keys have been generated and activated
+                                    </li>
+                                    <li>
+                                        <strong>Third-Party Services:</strong> Products or services purchased from third-party vendors on your behalf
+                                    </li>
+                                    <li>
+                                        <strong>Transaction Fees:</strong> Payment gateway processing fees and transaction charges
+                                    </li>
+                                    <li>
+                                        <strong>Promotional/Discounted Items:</strong> Products purchased under special promotions (unless defective)
                                     </li>
                                 </ul>
                             </div>
                         </section>
 
                         <section>
-                            <h2 class="text-2xl font-bold text-white mb-4">How to Request a Refund</h2>
+                            <h2 class="text-2xl font-bold text-white mb-4">5. How to Request a Refund</h2>
+                            
                             <div class="bg-purple-900/20 border border-purple-600/30 rounded-lg p-6">
-                                <p class="mb-4">To request a refund or cancellation:</p>
-                                <ol class="list-decimal pl-6 space-y-2">
-                                    <li>Contact our customer service team through the contact information provided on our website</li>
-                                    <li>Provide your order details and reason for refund/cancellation</li>
-                                    <li>Include any supporting documentation (screenshots, error messages, etc.)</li>
-                                    <li>Our team will review your request within 2-3 business days</li>
-                                    <li>You will be notified of the approval or rejection of your refund</li>
-                                    <li>If approved, your refund will be processed within 7 business days</li>
+                                <h3 class="text-xl font-bold text-purple-300 mb-4">Step-by-Step Process</h3>
+                                <ol class="list-decimal pl-6 space-y-3">
+                                    <li>
+                                        <strong class="text-white">Contact Us:</strong> Email <a href={`mailto:${companyInfo.email}`} class="text-purple-400 hover:text-purple-300">{companyInfo.email}</a> with subject line "Refund Request - [Order ID]"
+                                    </li>
+                                    <li>
+                                        <strong class="text-white">Provide Details:</strong>
+                                        <ul class="list-disc pl-6 mt-2 space-y-1 text-gray-300">
+                                            <li>Order ID/Transaction ID</li>
+                                            <li>Registered email address</li>
+                                            <li>Date of purchase</li>
+                                            <li>Amount paid</li>
+                                            <li>Reason for refund request</li>
+                                            <li>Supporting documentation (if applicable)</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <strong class="text-white">Review:</strong> Our team will review your request within 2-3 business days
+                                    </li>
+                                    <li>
+                                        <strong class="text-white">Decision:</strong> You will receive an email notification about the approval or rejection of your refund
+                                    </li>
+                                    <li>
+                                        <strong class="text-white">Processing:</strong> If approved, the refund will be initiated within 5-7 business days
+                                    </li>
+                                    <li>
+                                        <strong class="text-white">Confirmation:</strong> You will receive a refund confirmation with transaction details
+                                    </li>
                                 </ol>
                             </div>
                         </section>
 
                         <section>
-                            <h2 class="text-2xl font-bold text-white mb-4">Non-Refundable Items/Services</h2>
-                            <p class="mb-4">The following are non-refundable:</p>
-                            <ul class="list-disc pl-6 space-y-2">
-                                <li>Completed services and delivered projects</li>
-                                <li>Custom development work that has been delivered and accepted</li>
-                                <li>Training sessions that have been conducted</li>
-                                <li>Access fees to proprietary tools and platforms after usage</li>
-                                <li>Third-party services purchased on your behalf</li>
-                            </ul>
-                        </section>
-
-                        <section>
-                            <h2 class="text-2xl font-bold text-white mb-4">Refund Methods</h2>
-                            <p class="mb-4">
-                                Approved refunds will be processed to the original payment method used during purchase. Depending on your payment provider, it may take additional time for the refund to reflect in your account.
-                            </p>
-                            <div class="bg-yellow-900/20 border border-yellow-600/30 rounded-lg p-4">
-                                <p class="text-yellow-200 text-sm">
-                                    <strong>Note:</strong> Processing fees and transaction charges are non-refundable.
+                            <h2 class="text-2xl font-bold text-white mb-4">6. Failed/Pending Transactions</h2>
+                            
+                            <div class="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
+                                <p class="mb-4">
+                                    In case of a failed transaction where money has been debited from your account:
                                 </p>
+                                <ul class="list-disc pl-6 space-y-2">
+                                    <li>The amount will be automatically refunded within <strong>5-7 business days</strong> as per RBI guidelines</li>
+                                    <li>If the refund is not received within 10 business days, please contact us with your transaction details</li>
+                                    <li>For UPI transactions, refunds are typically faster (within 24-48 hours)</li>
+                                </ul>
+                                <div class="bg-blue-900/20 border border-blue-600/30 rounded-lg p-4 mt-4">
+                                    <p class="text-blue-200 text-sm">
+                                        <strong>Tip:</strong> Always keep a screenshot of failed transaction messages and bank notifications for faster resolution.
+                                    </p>
+                                </div>
                             </div>
                         </section>
 
                         <section>
-                            <h2 class="text-2xl font-bold text-white mb-4">Contact Us</h2>
+                            <h2 class="text-2xl font-bold text-white mb-4">7. Subscription Cancellation</h2>
+                            
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-purple-500 pl-4">
+                                    <h3 class="text-lg font-bold text-white mb-2">7.1 Monthly Subscriptions</h3>
+                                    <p>Cancel at least 24 hours before the next billing date to avoid charges. No refund for the current billing period.</p>
+                                </div>
+                                <div class="border-l-4 border-purple-500 pl-4">
+                                    <h3 class="text-lg font-bold text-white mb-2">7.2 Annual Subscriptions</h3>
+                                    <p>Pro-rated refunds may be available for the unused portion, subject to a 15% cancellation fee.</p>
+                                </div>
+                                <div class="border-l-4 border-purple-500 pl-4">
+                                    <h3 class="text-lg font-bold text-white mb-2">7.3 How to Cancel Subscription</h3>
+                                    <p>Email us at <a href={`mailto:${companyInfo.email}`} class="text-purple-400 hover:text-purple-300">{companyInfo.email}</a> with subject "Subscription Cancellation Request - [Subscription ID]"</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <h2 class="text-2xl font-bold text-white mb-4">8. Dispute Resolution</h2>
                             <p class="mb-4">
-                                For any questions regarding our refund and cancellation policy, or to initiate a refund request, please contact us through the information provided on our website.
+                                If you are not satisfied with our refund decision:
                             </p>
-                            <div class="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
-                                <p class="mb-2"><strong>Company:</strong> FILLS AI CONSULTANCY</p>
-                                <p class="mb-2"><strong>Address:</strong> Narsapur, Medak, Telangana, India</p>
-                                <p class="mb-2"><strong>Website:</strong> <a href="https://www.fills.ai/" class="text-purple-400 hover:text-purple-300">https://www.fills.ai/</a></p>
+                            <ol class="list-decimal pl-6 space-y-2">
+                                <li>Contact our Grievance Officer within 7 days of receiving the decision</li>
+                                <li>The Grievance Officer will review your case and provide a final decision within 15 business days</li>
+                                <li>For unresolved disputes, you may approach the appropriate consumer forum or regulatory authority</li>
+                            </ol>
+                        </section>
+
+                        <section>
+                            <h2 class="text-2xl font-bold text-white mb-4">9. Contact Information</h2>
+                            <div class="bg-purple-900/20 border border-purple-600/30 rounded-lg p-6">
+                                <h3 class="text-xl font-bold text-white mb-4">For Refund/Cancellation Requests</h3>
+                                
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <h4 class="font-bold text-purple-300 mb-2">Customer Support</h4>
+                                        <p class="mb-1"><strong>Company:</strong> {companyInfo.name}</p>
+                                        <p class="mb-1"><strong>Email:</strong> <a href={`mailto:${companyInfo.email}`} class="text-purple-400 hover:text-purple-300">{companyInfo.email}</a></p>
+                                        <p class="mb-1"><strong>Address:</strong> {companyInfo.address}</p>
+                                        <p class="mb-1"><strong>Website:</strong> <a href={companyInfo.website} class="text-purple-400 hover:text-purple-300">{companyInfo.website}</a></p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-purple-300 mb-2">Grievance Officer</h4>
+                                        <p class="mb-1"><strong>Name:</strong> {companyInfo.grievanceOfficer.name}</p>
+                                        <p class="mb-1"><strong>Designation:</strong> {companyInfo.grievanceOfficer.designation}</p>
+                                        <p class="mb-1"><strong>Email:</strong> <a href={`mailto:${companyInfo.grievanceOfficer.email}`} class="text-purple-400 hover:text-purple-300">{companyInfo.grievanceOfficer.email}</a></p>
+                                        <p class="text-sm text-gray-400 mt-2">Response Time: Within 48 hours on business days</p>
+                                    </div>
+                                </div>
+                                
                                 <p class="text-sm text-gray-400 mt-4">
-                                    Customer Service Hours: Monday - Friday (9:00 AM - 6:00 PM IST)
+                                    <strong>Business Hours:</strong> Monday - Friday, 9:00 AM - 6:00 PM IST
                                 </p>
                             </div>
                         </section>
 
                         <div class="mt-12 pt-6 border-t border-gray-700">
                             <p class="text-sm text-gray-400 text-center">
-                                Last Updated: November 2024
+                                Last Updated: {companyInfo.lastUpdated}
+                            </p>
+                            <p class="text-xs text-gray-500 text-center mt-2">
+                                © {new Date().getFullYear()} {companyInfo.name}. All rights reserved.
                             </p>
                         </div>
                     </div>
@@ -191,8 +377,8 @@ import Layout from '../layouts/Layout.astro';
     }
 
     .prose h3 {
-        margin-top: 1.5rem;
-        margin-bottom: 0.75rem;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
     }
 
     .prose a {
@@ -210,5 +396,15 @@ import Layout from '../layouts/Layout.astro';
     .prose li {
         line-height: 1.75;
     }
-</style>
 
+    .prose table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .prose th,
+    .prose td {
+        text-align: left;
+        padding: 0.75rem 0.5rem;
+    }
+</style>
