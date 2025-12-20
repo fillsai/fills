@@ -1,119 +1,141 @@
 ---
+import Layout from '../layouts/Layout.astro';
 import PhonePeCheckout from '../components/PhonePeCheckout.svelte';
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PhonePe Payment Gateway - Test Mode</title>
-  <meta name="description" content="Secure payment processing with PhonePe">
-</head>
-<body class="bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 min-h-screen">
-  <div class="container mx-auto px-4 py-12">
-    <!-- Header -->
-    <div class="text-center mb-12">
-      <h1 class="text-5xl font-bold text-gray-800 mb-4">
-        Payment Gateway
-      </h1>
-      <p class="text-lg text-gray-600">
-        Powered by <span class="font-semibold text-purple-600">PhonePe</span> • Test Mode
-      </p>
-      <div class="mt-4 inline-block px-4 py-2 bg-yellow-100 border border-yellow-400 rounded-lg">
-        <p class="text-sm text-yellow-800 font-medium">
-          🧪 Running in UAT Sandbox Mode
+<Layout title="Payment - FILLS AI Consultancy">
+  <main class="relative min-h-screen overflow-hidden py-12 pt-24">
+    <div class="container mx-auto px-4">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4"
+            style="background: linear-gradient(to right, #c084fc, #818cf8, #38bdf8);
+                   -webkit-background-clip: text;
+                   -webkit-text-fill-color: transparent;
+                   background-clip: text;">
+          Payment Gateway
+        </h1>
+        <p class="text-lg text-gray-400">
+          Powered by <span class="font-semibold text-purple-400">PhonePe</span>
         </p>
-      </div>
-    </div>
-
-    <!-- Payment Component -->
-    <div class="max-w-2xl mx-auto">
-      <PhonePeCheckout client:load defaultAmount={100} />
-    </div>
-
-    <!-- Information Section -->
-    <div class="max-w-4xl mx-auto mt-16 grid md:grid-cols-3 gap-6">
-      <div class="bg-white p-6 rounded-xl shadow-lg">
-        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
-          <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
+        <div class="mt-4 inline-block px-4 py-2 bg-yellow-900/30 border border-yellow-600/50 rounded-lg">
+          <p class="text-sm text-yellow-200 font-medium flex items-center gap-2">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+            </svg>
+            Running in UAT Sandbox Mode
+          </p>
         </div>
-        <h3 class="text-lg font-bold text-gray-800 mb-2">Secure Payments</h3>
-        <p class="text-sm text-gray-600">
-          All transactions are encrypted and secured by PhonePe's payment gateway
-        </p>
       </div>
 
-      <div class="bg-white p-6 rounded-xl shadow-lg">
-        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-        </div>
-        <h3 class="text-lg font-bold text-gray-800 mb-2">Instant Processing</h3>
-        <p class="text-sm text-gray-600">
-          Lightning-fast payment processing with real-time status updates
-        </p>
+      <!-- Payment Component -->
+      <div class="max-w-lg mx-auto">
+        <PhonePeCheckout client:load defaultAmount={100} />
       </div>
 
-      <div class="bg-white p-6 rounded-xl shadow-lg">
-        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
-          <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
+      <!-- Information Section -->
+      <div class="max-w-4xl mx-auto mt-16 grid md:grid-cols-3 gap-6">
+        <div class="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800/50">
+          <div class="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Secure Payments</h3>
+          <p class="text-sm text-gray-400">
+            All transactions are encrypted and secured by PhonePe's payment gateway
+          </p>
         </div>
-        <h3 class="text-lg font-bold text-gray-800 mb-2">Multiple Options</h3>
-        <p class="text-sm text-gray-600">
-          Support for UPI, Cards, Net Banking, and Wallets
-        </p>
-      </div>
-    </div>
 
-    <!-- Test Mode Instructions -->
-    <div class="max-w-4xl mx-auto mt-12 bg-white rounded-xl shadow-lg p-8">
-      <h2 class="text-2xl font-bold text-gray-800 mb-4">📱 Testing Instructions</h2>
-      <div class="space-y-4 text-gray-700">
-        <div class="flex items-start gap-3">
-          <span class="flex-shrink-0 w-6 h-6 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold">1</span>
-          <p>Enter the amount you want to test (minimum ₹1)</p>
+        <div class="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800/50">
+          <div class="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Instant Processing</h3>
+          <p class="text-sm text-gray-400">
+            Lightning-fast payment processing with real-time status updates
+          </p>
         </div>
-        <div class="flex items-start gap-3">
-          <span class="flex-shrink-0 w-6 h-6 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold">2</span>
-          <p>Click "Pay with PhonePe" to initiate the payment</p>
+
+        <div class="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800/50">
+          <div class="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Multiple Options</h3>
+          <p class="text-sm text-gray-400">
+            Support for UPI, Cards, Net Banking, and Wallets
+          </p>
         </div>
-        <div class="flex items-start gap-3">
-          <span class="flex-shrink-0 w-6 h-6 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold">3</span>
-          <p>You'll be redirected to PhonePe's sandbox checkout page</p>
-        </div>
-        <div class="flex items-start gap-3">
-          <span class="flex-shrink-0 w-6 h-6 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold">4</span>
-          <div>
-            <p class="mb-2">Use test credentials for payment:</p>
-            <ul class="ml-4 space-y-1 text-sm">
-              <li>• <strong>Test Card:</strong> 4208 5851 9011 6667</li>
-              <li>• <strong>Expiry:</strong> 06/2027</li>
-              <li>• <strong>CVV:</strong> 508</li>
-              <li>• <strong>OTP:</strong> 123456</li>
-            </ul>
+      </div>
+
+      <!-- Test Mode Instructions -->
+      <div class="max-w-4xl mx-auto mt-12 bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-800/50 p-8">
+        <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+          <span class="w-10 h-10 bg-purple-500/20 rounded-full flex items-center justify-center">
+            <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+          </span>
+          Testing Instructions
+        </h2>
+        <div class="space-y-4 text-gray-300">
+          <div class="flex items-start gap-4">
+            <span class="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold">1</span>
+            <p>Enter the amount you want to test (minimum ₹1)</p>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold">2</span>
+            <p>Click "Pay with PhonePe" to initiate the payment</p>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold">3</span>
+            <p>You'll be redirected to PhonePe's sandbox checkout page</p>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold">4</span>
+            <div>
+              <p class="mb-3">Use these test credentials for payment:</p>
+              <div class="bg-gray-800/50 rounded-lg p-4 border border-gray-700/50">
+                <div class="grid sm:grid-cols-2 gap-3 text-sm font-mono">
+                  <div>
+                    <span class="text-gray-500">Test Card:</span>
+                    <span class="text-purple-400 ml-2">4208 5851 9011 6667</span>
+                  </div>
+                  <div>
+                    <span class="text-gray-500">Expiry:</span>
+                    <span class="text-purple-400 ml-2">06/2027</span>
+                  </div>
+                  <div>
+                    <span class="text-gray-500">CVV:</span>
+                    <span class="text-purple-400 ml-2">508</span>
+                  </div>
+                  <div>
+                    <span class="text-gray-500">OTP:</span>
+                    <span class="text-purple-400 ml-2">123456</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Back to Home -->
-    <div class="text-center mt-12">
-      <a 
-        href="/" 
-        class="inline-flex items-center gap-2 px-6 py-3 bg-white text-purple-600 font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
-      >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-        </svg>
-        Back to Home
-      </a>
+      <!-- Back to Home -->
+      <div class="text-center mt-12">
+        <a 
+          href="/" 
+          class="inline-flex items-center gap-2 px-6 py-3 bg-gray-800 text-gray-300 hover:text-white font-semibold rounded-lg border border-gray-700 hover:border-gray-600 transition-all"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Home
+        </a>
+      </div>
     </div>
-  </div>
-</body>
-</html>
+  </main>
+</Layout>

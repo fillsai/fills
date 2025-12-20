@@ -10,8 +10,8 @@
   let error = '';
   let success = false;
 
-  // Get base URL from environment or use default
-  const baseUrl = import.meta.env.PUBLIC_BASE_URL || 'http://localhost:4321';
+  // Get base URL from environment or use current origin
+  const baseUrl = import.meta.env.PUBLIC_BASE_URL || (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:4321');
 
   async function initiatePayment() {
     // Validate amount
@@ -33,7 +33,7 @@
         },
         body: JSON.stringify({
           amount: amount,
-          redirectUrl: `${baseUrl}/payment/status`,
+          redirectUrl: `${baseUrl}/`,
         }),
       });
 
