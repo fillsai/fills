@@ -3,35 +3,7 @@
   import { fade, slide } from 'svelte/transition';
 
   let mounted = false;
-  let activeTab = 'state';
-  let count = 0;
-  let todos = [];
-  let newTodo = '';
-  let showCompleted = false;
-
-  // Reactive statements
-  $: doubledCount = count * 2;
-  $: completedTodos = todos.filter(todo => todo.completed).length;
-  $: pendingTodos = todos.filter(todo => !todo.completed).length;
-  $: filteredTodos = showCompleted ? todos : todos.filter(todo => !todo.completed);
-
-  // Methods
-  function addTodo() {
-    if (newTodo.trim()) {
-      todos = [...todos, { text: newTodo, completed: false, id: Date.now() }];
-      newTodo = '';
-    }
-  }
-
-  function toggleTodo(id) {
-    todos = todos.map(todo => 
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    );
-  }
-
-  function removeTodo(id) {
-    todos = todos.filter(todo => todo.id !== id);
-  }
+  let activeTab = 'weekly';
 
   onMount(() => {
     mounted = true;
@@ -51,115 +23,95 @@
         <!-- Tabs -->
         <div class="flex border-b border-gray-800/50">
           <button
-            class={`px-4 py-3 text-sm font-medium transition-colors duration-200 ${
-              activeTab === 'state'
-                ? 'text-orange-400 border-b-2 border-orange-400'
+            class={`px-6 py-3 text-sm font-medium transition-colors duration-200 ${
+              activeTab === 'weekly'
+                ? 'text-orange-400 border-b-2 border-orange-400 bg-orange-400/5'
                 : 'text-gray-400 hover:text-white'
             }`}
-            on:click={() => activeTab = 'state'}
+            on:click={() => activeTab = 'weekly'}
           >
-            Short Term
+            Weekly
           </button>
           <button
-            class={`px-4 py-3 text-sm font-medium transition-colors duration-200 ${
-              activeTab === 'todo'
-                ? 'text-orange-400 border-b-2 border-orange-400'
+            class={`px-6 py-3 text-sm font-medium transition-colors duration-200 ${
+              activeTab === 'monthly'
+                ? 'text-orange-400 border-b-2 border-orange-400 bg-orange-400/5'
                 : 'text-gray-400 hover:text-white'
             }`}
-            on:click={() => activeTab = 'todo'}
+            on:click={() => activeTab = 'monthly'}
           >
-            Medium Term
+            Monthly
           </button>
         </div>
 
         <!-- Content -->
-        <div class="p-6">
-          {#if activeTab === 'state'}
-            <div in:fade class="space-y-6">
+        <div class="p-8">
+          {#if activeTab === 'weekly'}
+            <div in:fade={{ duration: 300 }} class="space-y-6">
               <div class="space-y-4">
-                <h3 class="text-lg font-medium text-white">Weekly Plan</h3>
-                <div class="text-gray-400">
-                  Base price: <span class="text-orange-400">$850/week</span>
+                <div class="flex items-center justify-between">
+                  <h3 class="text-xl font-semibold text-white">Short Term Plan</h3>
+                  <span class="px-3 py-1 bg-orange-500/10 text-orange-400 text-xs font-bold rounded-full border border-orange-500/20 uppercase tracking-wider">Most Flexible</span>
                 </div>
-                <div class="text-gray-400">
-                  Delivery: <span class="text-orange-400">1 week</span>
+                <div class="grid sm:grid-cols-2 gap-6 pt-4">
+                  <div class="p-4 rounded-xl bg-gray-800/30 border border-gray-700/50">
+                    <p class="text-sm text-gray-400 mb-1">Base Price</p>
+                    <p class="text-2xl font-bold text-orange-400">₹70,000<span class="text-sm text-gray-500 font-normal">/week</span></p>
+                  </div>
+                  <div class="p-4 rounded-xl bg-gray-800/30 border border-gray-700/50">
+                    <p class="text-sm text-gray-400 mb-1">Delivery Time</p>
+                    <p class="text-2xl font-bold text-white">1 Week</p>
+                  </div>
                 </div>
-              </div>
-
-              <div class="space-y-2">
-                <h3 class="text-lg font-medium text-white">How It Works</h3>
-                <pre class="bg-gray-800/50 p-4 rounded-lg text-sm font-mono text-gray-300 overflow-x-auto">
-let count = 0;
-$: doubledCount = count * 2;
-
-// No need for useState or useEffect!
-// Svelte handles reactivity automatically</pre>
+                <div class="pt-4">
+                  <h4 class="text-sm font-semibold text-gray-300 mb-3">Key Benefits</h4>
+                  <ul class="grid sm:grid-cols-2 gap-3">
+                    <li class="flex items-center gap-2 text-sm text-gray-400">
+                      <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                      Quick full implementation
+                    </li>
+                    <li class="flex items-center gap-2 text-sm text-gray-400">
+                      <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                      Direct expert access
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-          {:else if activeTab === 'todo'}
-            <div in:fade class="space-y-6">
-              <div class="flex gap-2">
-                <input
-                  type="text"
-                  bind:value={newTodo}
-                  placeholder="Add a new todo..."
-                  class="flex-1 px-4 py-2 rounded-lg bg-gray-800/50 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500/50"
-                  on:keydown={(e) => e.key === 'Enter' && addTodo()}
-                />
-                <button
-                  on:click={addTodo}
-                  class="px-4 py-2 rounded-lg bg-orange-500/20 text-orange-400 hover:bg-orange-500/30 transition-colors"
-                >
-                  Add
-                </button>
-              </div>
-
-              <div class="flex items-center justify-between text-sm text-gray-400">
-                <div class="space-x-2">
-                  <span>Completed: {completedTodos}</span>
-                  <span>Pending: {pendingTodos}</span>
+          {:else if activeTab === 'monthly'}
+            <div in:fade={{ duration: 300 }} class="space-y-6">
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-xl font-semibold text-white">Medium Term Plan</h3>
+                  <span class="px-3 py-1 bg-indigo-500/10 text-indigo-400 text-xs font-bold rounded-full border border-indigo-500/20 uppercase tracking-wider">Best Value</span>
                 </div>
-                <label class="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    bind:checked={showCompleted}
-                    class="rounded border-gray-700 bg-gray-800/50 text-orange-500 focus:ring-orange-500/50"
-                  />
-                  Show completed
-                </label>
-              </div>
-
-              <div class="space-y-2">
-                {#each filteredTodos as todo (todo.id)}
-                  <div
-                    in:slide|local={{ duration: 200 }}
-                    class="flex items-center gap-3 p-3 rounded-lg bg-gray-800/30 border border-gray-700/50"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={todo.completed}
-                      on:change={() => toggleTodo(todo.id)}
-                      class="rounded border-gray-700 bg-gray-800/50 text-orange-500 focus:ring-orange-500/50"
-                    />
-                    <span class={todo.completed ? 'line-through text-gray-500' : 'text-white'}>
-                      {todo.text}
-                    </span>
-                    <button
-                      on:click={() => removeTodo(todo.id)}
-                      class="ml-auto text-gray-500 hover:text-red-400 transition-colors"
-                    >
-                      ×
-                    </button>
+                <div class="grid sm:grid-cols-2 gap-6 pt-4">
+                  <div class="p-4 rounded-xl bg-gray-800/30 border border-gray-700/50">
+                    <p class="text-sm text-gray-400 mb-1">Starting From</p>
+                    <p class="text-2xl font-bold text-orange-400">₹2,50,000<span class="text-sm text-gray-500 font-normal">/month</span></p>
                   </div>
-                {/each}
-              </div>
-
-              <h3 class="text-lg font-medium text-white">Monthly Plan</h3>
-              <div class="text-gray-400">
-                Starting from: <span class="text-orange-400">$3000/month</span>
-              </div>
-              <div class="text-gray-400">
-                Timeline: <span class="text-orange-400">Fastest possible delivery</span>
+                  <div class="p-4 rounded-xl bg-gray-800/30 border border-gray-700/50">
+                    <p class="text-sm text-gray-400 mb-1">Timeline</p>
+                    <p class="text-2xl font-bold text-white">Fastest Delivery</p>
+                  </div>
+                </div>
+                <div class="pt-4">
+                  <h4 class="text-sm font-semibold text-gray-300 mb-3">Key Benefits</h4>
+                  <ul class="grid sm:grid-cols-2 gap-3">
+                    <li class="flex items-center gap-2 text-sm text-gray-400">
+                      <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                      Comprehensive solutions
+                    </li>
+                    <li class="flex items-center gap-2 text-sm text-gray-400">
+                      <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                      Full system integration
+                    </li>
+                    <li class="flex items-center gap-2 text-sm text-gray-400">
+                      <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                      Dedicated support team
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           {/if}
@@ -170,7 +122,7 @@ $: doubledCount = count * 2;
 </section>
 
 <style>
-  input[type="checkbox"] {
-    @apply w-4 h-4 cursor-pointer;
+  button {
+    outline: none;
   }
 </style>
