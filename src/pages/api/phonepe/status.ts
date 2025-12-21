@@ -11,6 +11,7 @@ export const prerender = false;
  */
 export const GET: APIRoute = async ({ url }) => {
     console.log('=== PhonePe Payment Status Check API Called ===');
+
     
     try {
         const orderId = url.searchParams.get('orderId');
@@ -74,38 +75,45 @@ export const GET: APIRoute = async ({ url }) => {
         // Get PhonePe configuration
         const config = getPhonePeConfig();
 
-        // Generate JWT token for authentication
-        const jwtToken = generateJWT(config.clientId, config.clientSecret);
+        // Get OAuth Access Token
+        const accessToken = await getAccessToken(config);
+
+        // Get headers with OAuth Bearer token
+        const headers = getPhonePeHeaders(accessToken);
+
+        // PhonePe order status API endpoint
+        const apiUrl = `${config.apiBaseUrl}/checkout/v2/order/${orderId}/status`;
+        console.log('Calling PhonePe Status API:', apiUrl);
 
         // Call PhonePe status check API
-        const phonePeResponse = await fetch(
-            `${config.apiBaseUrl}/checkout/v2/status/${config.clientId}/${orderId}`,
-            {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `O-Bearer ${jwtToken}`,
-                },
-            }
-        );
+        const phonePeResponse = await fetch(apiUrl, {
+            method: 'GET',
+            headers,
+        });
 
-        const responseData = await phonePeResponse.json();
+        const responseText = await phonePeResponse.text();
+        console.log('PhonePe status raw response:', responseText);
 
-        if (!phonePeResponse.ok) {
+        let responseData;
+        try {
+            responseData = JSON.parse(responseText);
+        } catch (e) {
+            console.error('Failed to parse PhonePe status response:', e);
             return new Response(
                 JSON.stringify({
                     success: false,
-                    error: 'Failed to fetch payment status',
-                    details: responseData,
+                    error: 'Invalid response from PhonePe',
+                    rawResponse: responseText,
                 }),
                 {
-                    status: phonePeResponse.status,
+                    status: 500,
                     headers: { 'Content-Type': 'application/json' },
                 }
             );
         }
 
-        // Return payment status
+        console.log('PhonePe status parsed response:', JSON.stringify(responseData, null, 2));
+        // Return success response with status data
         return new Response(
             JSON.stringify({
                 success: true,

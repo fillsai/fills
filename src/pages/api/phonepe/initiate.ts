@@ -34,7 +34,8 @@ export const POST: APIRoute = async ({ request }) => {
         console.log('Request received:', { amount, redirectUrl });
         console.log('Request body:', body);
         const { amount, redirectUrl } = body;
-        console.log('Amount:', amount, 'Redirect URL:', redirectUrl);
+
+        console.log('Request received:', { amount, redirectUrl });
 
         // Validate amount
         if (!amount || !validateAmount(amount)) {
@@ -89,10 +90,13 @@ export const POST: APIRoute = async ({ request }) => {
         // Get PhonePe configuration
         const config = getPhonePeConfig();
 
+        // Step 1: Get OAuth Access Token
+        const accessToken = await getAccessToken(config);
+
         // Generate unique merchant order ID
         const merchantOrderId = generateMerchantOrderId();
 
-        // Convert amount to paise (PhonePe expects amount in paise)
+        // Convert amount to paise
         const amountInPaise = rupeesToPaise(amount);
 
         // Create payment payload
@@ -146,23 +150,35 @@ export const POST: APIRoute = async ({ request }) => {
         // Use Client Secret as Bearer token (PhonePe authentication)
         const authToken = config.clientSecret;
 
-        // Call PhonePe API
-        const phonePeResponse = await fetch(
-            `${config.apiBaseUrl}/checkout/v2/pay`,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${authToken}`,
-                },
-                body: JSON.stringify(paymentPayload),
-            }
-        );
+        const phonePeResponse = await fetch(apiUrl, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(paymentPayload),
+        });
 
-        const responseData = await phonePeResponse.json();
+        const responseText = await phonePeResponse.text();
+        console.log('PhonePe Create Payment response:', responseText);
+
+        let responseData;
+        try {
+            responseData = JSON.parse(responseText);
+        } catch (e) {
+            console.error('Failed to parse PhonePe response:', e);
+            return new Response(
+                JSON.stringify({
+                    success: false,
+                    error: 'Invalid response from PhonePe',
+                    rawResponse: responseText,
+                }),
+                {
+                    status: 500,
+                    headers: { 'Content-Type': 'application/json' },
+                }
+            );
+        }
 
         // Check if payment initiation was successful
-        if (!phonePeResponse.ok || !responseData.success) {
+        if (!phonePeResponse.ok || responseData.errorCode) {
             console.error('PhonePe API Error:', responseData);
             return new Response(
                 JSON.stringify({
@@ -177,13 +193,17 @@ export const POST: APIRoute = async ({ request }) => {
                     details: responseData,
                 }),
                 {
-                    status: phonePeResponse.status,
+                    status: phonePeResponse.status || 400,
                     headers: { 'Content-Type': 'application/json' },
                 }
             );
         }
 
         // Extract checkout URL from response
+        const checkoutUrl =
+            responseData.redirectUrl ||
+            responseData.data?.instrumentResponse?.redirectInfo?.url ||
+            responseData.data?.redirectUrl;
         // PhonePe checkout API returns redirectUrl directly in the response
         const checkoutUrl = 
             responseData.redirectUrl ||
@@ -197,6 +217,7 @@ export const POST: APIRoute = async ({ request }) => {
         const checkoutUrl = responseData.data?.instrumentResponse?.redirectInfo?.url;
 
         if (!checkoutUrl) {
+            console.error('No checkout URL in response:', responseData);
             return new Response(
                 JSON.stringify({
                     success: false,

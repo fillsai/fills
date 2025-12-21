@@ -24,12 +24,12 @@
   ];
 
   const codeExample = `<!-- Pricing Options -->
-Short Term: $850/week
+Short Term: ₹70,000/week
 ✓ Quick delivery
 ✓ One week timeline
 ✓ Full implementation
 
-Medium Term: $3000-4000/month
+Medium Term: ₹2,50,000 - 3,35,000/month
 ✓ Comprehensive solution
 ✓ Fastest possible delivery
 ✓ Complete integration
