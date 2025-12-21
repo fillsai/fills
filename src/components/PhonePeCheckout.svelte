@@ -14,8 +14,6 @@
   const baseUrl = typeof window !== 'undefined' 
     ? window.location.origin 
     : (import.meta.env.PUBLIC_SITE_URL || 'http://localhost:4321');
-  // Get base URL from environment or use default
-  const baseUrl = import.meta.env.PUBLIC_BASE_URL || 'http://localhost:4321';
 
   async function initiatePayment() {
     // Validate amount
