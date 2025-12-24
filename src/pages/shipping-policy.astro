@@ -54,24 +54,32 @@ const companyInfo = {
                             </div>
                         </div>
 
-                        <!-- Important Notice - Digital Business -->
-                        <div class="bg-blue-900/30 border border-blue-500/50 rounded-lg p-6 mb-8">
-                            <h2 class="text-xl font-bold text-blue-300 mb-3">📌 Important: Digital Services Business</h2>
-                            <p class="text-blue-100 mb-3">
-                                <strong>{companyInfo.name}</strong> is primarily a <strong>digital services and AI consulting company</strong>. The majority of our products and services are delivered electronically and do not require physical shipping.
-                            </p>
-                            <p class="text-blue-100 mb-3">
-                                This policy outlines how we deliver our digital services and, in cases where applicable, how we handle the shipping of any physical products.
-                            </p>
-                            <div class="bg-blue-800/30 rounded-lg p-4 mt-4">
-                                <p class="text-blue-200 font-semibold">
-                                    ✓ No Physical Goods Shipping Required for Most Orders
-                                </p>
-                                <p class="text-blue-200 text-sm mt-1">
-                                    Our AI consulting, development, and digital product deliveries are entirely electronic.
-                                </p>
+                        <!-- No Physical Shipping Notice -->
+                        <div class="bg-green-900/20 border-l-4 border-green-500 rounded-r-lg p-6 mb-8">
+                            <div class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-green-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <div>
+                                    <h3 class="text-lg font-bold text-green-300 mb-2">Digital Delivery Only - No Physical Shipping</h3>
+                                    <p class="text-green-100 mb-3">
+                                        <strong>{companyInfo.name}</strong> is a digital services company. We do not ship physical products.
+                                    </p>
+                                    <div class="bg-green-800/20 rounded-lg p-4 mb-3">
+                                        <p class="text-green-200 font-semibold text-sm mb-2">Our Services Are Delivered Digitally:</p>
+                                        <ul class="list-disc pl-5 space-y-1 text-green-200 text-sm">
+                                            <li><strong>Software Consulting:</strong> Via video calls, online meetings</li>
+                                            <li><strong>SaaS Development:</strong> Deployed to cloud platforms (AWS, Azure, Vercel)</li>
+                                            <li><strong>Healthcare AI Agents:</strong> API integration and cloud deployment</li>
+                                        </ul>
+                                    </div>
+                                    <p class="text-green-100 text-sm">
+                                        <strong>No courier services, no postal delivery, no physical shipments.</strong> This policy explains our digital service delivery process.
+                                    </p>
+                                </div>
                             </div>
                         </div>
+
 
                         <section>
                             <h2 class="text-2xl font-bold text-white mb-4">1. Types of Delivery</h2>
@@ -90,18 +98,6 @@ const companyInfo = {
                                     </ul>
                                 </div>
 
-                                <div class="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
-                                    <h3 class="text-xl font-bold text-yellow-300 mb-3">1.2 Physical Delivery (When Applicable)</h3>
-                                    <p class="mb-4">In rare cases where physical products are involved:</p>
-                                    <ul class="list-disc pl-6 space-y-2">
-                                        <li><strong class="text-white">Hardware Components:</strong> If included in a project scope</li>
-                                        <li><strong class="text-white">Printed Materials:</strong> Manuals, certificates, or marketing materials</li>
-                                        <li><strong class="text-white">Merchandise:</strong> Company-branded items or promotional products</li>
-                                    </ul>
-                                    <p class="text-sm text-gray-400 mt-3">
-                                        Note: Physical shipping is available only within India at this time.
-                                    </p>
-                                </div>
                             </div>
                         </section>
 
@@ -155,150 +151,72 @@ const companyInfo = {
                             </div>
                         </section>
 
-                        <section>
-                            <h2 class="text-2xl font-bold text-white mb-4">3. Physical Shipping (When Applicable)</h2>
-                            
-                            <div class="space-y-4">
-                                <div class="border-l-4 border-purple-500 pl-4">
-                                    <h3 class="text-lg font-bold text-white mb-2">3.1 Processing Time</h3>
-                                    <p>Physical orders are processed within <strong>2-3 business days</strong> of order confirmation.</p>
-                                </div>
-
-                                <div class="border-l-4 border-purple-500 pl-4">
-                                    <h3 class="text-lg font-bold text-white mb-2">3.2 Shipping Timeline</h3>
-                                    <div class="bg-gray-800/50 rounded-lg p-4 border border-gray-700 mt-2">
-                                        <ul class="space-y-2">
-                                            <li><strong class="text-white">Standard Delivery (India):</strong> 5-7 business days</li>
-                                            <li><strong class="text-white">Express Delivery (India):</strong> 2-3 business days</li>
-                                            <li><strong class="text-white">Metro Cities:</strong> 3-5 business days</li>
-                                            <li><strong class="text-white">Remote Areas:</strong> 7-10 business days</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="border-l-4 border-purple-500 pl-4">
-                                    <h3 class="text-lg font-bold text-white mb-2">3.3 Shipping Charges</h3>
-                                    <div class="bg-gray-800/50 rounded-lg p-4 border border-gray-700 mt-2">
-                                        <ul class="space-y-2">
-                                            <li><strong class="text-white">Digital Products:</strong> Free (No shipping required)</li>
-                                            <li><strong class="text-white">Standard Shipping:</strong> ₹50-150 (based on location and weight)</li>
-                                            <li><strong class="text-white">Express Shipping:</strong> ₹200-500 (based on location and weight)</li>
-                                            <li><strong class="text-white">Free Shipping:</strong> Orders above ₹5,000</li>
-                                        </ul>
-                                        <p class="text-sm text-gray-400 mt-3">
-                                            Shipping charges will be calculated and displayed at checkout before payment.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="border-l-4 border-purple-500 pl-4">
-                                    <h3 class="text-lg font-bold text-white mb-2">3.4 Shipping Partners</h3>
-                                    <p>We use reputable courier services for physical deliveries, including but not limited to Delhivery, BlueDart, DTDC, and India Post.</p>
-                                </div>
-                            </div>
-                        </section>
 
                         <section>
-                            <h2 class="text-2xl font-bold text-white mb-4">4. Order Tracking</h2>
+                            <h2 class="text-2xl font-bold text-white mb-4">3. Service Delivery Tracking</h2>
                             
                             <div class="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
-                                <div class="space-y-4">
-                                    <div>
-                                        <h3 class="text-lg font-bold text-green-300 mb-2">For Digital Products:</h3>
-                                        <ul class="list-disc pl-6 space-y-1">
-                                            <li>Order confirmation email immediately after purchase</li>
-                                            <li>Delivery notification email with access details/download links</li>
-                                            <li>Track project progress through your client dashboard (for ongoing services)</li>
-                                        </ul>
-                                    </div>
-
-                                    <div>
-                                        <h3 class="text-lg font-bold text-yellow-300 mb-2">For Physical Products:</h3>
-                                        <ul class="list-disc pl-6 space-y-1">
-                                            <li>Order confirmation email with order details</li>
-                                            <li>Shipping confirmation email with tracking number once dispatched</li>
-                                            <li>Real-time tracking via courier partner website</li>
-                                            <li>SMS/Email notifications for delivery updates</li>
-                                            <li>Delivery confirmation upon successful receipt</li>
-                                        </ul>
-                                    </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-green-300 mb-2">Digital Service Delivery:</h3>
+                                    <ul class="list-disc pl-6 space-y-1">
+                                        <li>Order confirmation email immediately after purchase</li>
+                                        <li>Service initiation notification within 24-48 hours</li>
+                                        <li>Delivery notification email with access details/download links</li>
+                                        <li>Track project progress through your client dashboard (for ongoing services)</li>
+                                        <li>Email updates at key milestones</li>
+                                    </ul>
                                 </div>
                             </div>
                         </section>
 
                         <section>
-                            <h2 class="text-2xl font-bold text-white mb-4">5. Delivery Issues</h2>
+                            <h2 class="text-2xl font-bold text-white mb-4">4. Service Delivery Issues</h2>
                             
                             <div class="space-y-4">
                                 <div class="border-l-4 border-purple-500 pl-4">
-                                    <h3 class="text-lg font-bold text-white mb-2">5.1 Digital Delivery Issues</h3>
-                                    <p class="mb-2">If you don't receive your digital product:</p>
+                                    <h3 class="text-lg font-bold text-white mb-2">4.1 Digital Delivery Issues</h3>
+                                    <p class="mb-2">If you don't receive service access or delivery confirmation:</p>
                                     <ul class="list-disc pl-6 space-y-1">
                                         <li>Check your spam/junk email folder</li>
                                         <li>Verify the email address used during purchase</li>
                                         <li>Contact us at <a href={`mailto:${companyInfo.email}`} class="text-purple-400 hover:text-purple-300">{companyInfo.email}</a></li>
-                                        <li>We will resend the delivery within 24 hours</li>
+                                        <li>We will resend access details or reschedule service delivery within 24 hours</li>
                                     </ul>
                                 </div>
 
                                 <div class="border-l-4 border-purple-500 pl-4">
-                                    <h3 class="text-lg font-bold text-white mb-2">5.2 Physical Delivery Issues</h3>
-                                    <ul class="list-disc pl-6 space-y-2">
-                                        <li>
-                                            <strong>Incorrect Address:</strong> Contact us within 24 hours to update the shipping address. Additional charges may apply for redirected shipments.
-                                        </li>
-                                        <li>
-                                            <strong>Failed Delivery:</strong> Courier will attempt delivery 2-3 times. Package returns to us after failed attempts (reshipment charges may apply).
-                                        </li>
-                                        <li>
-                                            <strong>Damaged Package:</strong> Report within 48 hours with photos. We will arrange replacement at no cost.
-                                        </li>
-                                        <li>
-                                            <strong>Lost Shipment:</strong> Report after 15 days if tracking shows no updates. We will investigate and arrange replacement or refund.
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="border-l-4 border-purple-500 pl-4">
-                                    <h3 class="text-lg font-bold text-white mb-2">5.3 Delayed Deliveries</h3>
-                                    <p>Delays may occur due to:</p>
-                                    <ul class="list-disc pl-6 space-y-1 mt-2">
-                                        <li>Natural disasters or weather conditions</li>
-                                        <li>Public holidays or courier service disruptions</li>
-                                        <li>Remote location accessibility issues</li>
-                                        <li>Customs or regulatory inspections (if applicable)</li>
+                                    <h3 class="text-lg font-bold text-white mb-2">4.2 Service Delays</h3>
+                                    <p class="mb-2">Service delays may occur due to:</p>
+                                    <ul class="list-disc pl-6 space-y-1">
+                                        <li>High volume of client requests</li>
+                                        <li>Technical platform issues</li>
+                                        <li>Public holidays</li>
+                                        <li>Resource availability constraints</li>
                                     </ul>
                                     <p class="text-sm text-gray-400 mt-2">
-                                        We will notify you of any significant delays and provide updated timelines.
+                                        We will notify you of any significant delays and provide updated service delivery timelines.
                                     </p>
                                 </div>
                             </div>
                         </section>
 
                         <section>
-                            <h2 class="text-2xl font-bold text-white mb-4">6. Service Locations</h2>
+                            <h2 class="text-2xl font-bold text-white mb-4">5. Service Availability</h2>
                             
                             <div class="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
                                 <div class="space-y-4">
                                     <div class="flex items-start gap-3">
                                         <span class="text-green-400 text-xl">🌐</span>
                                         <div>
-                                            <h3 class="font-bold text-white">Digital Services</h3>
-                                            <p class="text-gray-300">Available <strong>globally</strong> - We serve clients worldwide for all our digital and consulting services.</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-start gap-3">
-                                        <span class="text-blue-400 text-xl">🇮🇳</span>
-                                        <div>
-                                            <h3 class="font-bold text-white">Physical Products</h3>
-                                            <p class="text-gray-300">Currently shipping only within <strong>India</strong>. International shipping may be available upon request for select products.</p>
+                                            <h3 class="font-bold text-white">Digital Services (Primary)</h3>
+                                            <p class="text-gray-300">Available <strong>globally</strong> - We serve clients worldwide for all our software consulting, SaaS development, and AI agent services delivered remotely via cloud platforms and video conferencing.</p>
                                         </div>
                                     </div>
                                     <div class="flex items-start gap-3">
                                         <span class="text-purple-400 text-xl">📍</span>
                                         <div>
-                                            <h3 class="font-bold text-white">On-Site Services</h3>
-                                            <p class="text-gray-300">Available in <strong>Telangana</strong> and surrounding regions. Travel charges may apply for distant locations.</p>
+                                            <h3 class="font-bold text-white">On-Site Consulting (Optional)</h3>
+                                            <p class="text-gray-300">Available in <strong>Telangana</strong> and surrounding regions. Travel charges may apply for distant locations. All on-site consulting can also be provided remotely if preferred.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -306,7 +224,7 @@ const companyInfo = {
                         </section>
 
                         <section>
-                            <h2 class="text-2xl font-bold text-white mb-4">7. Order Confirmation</h2>
+                            <h2 class="text-2xl font-bold text-white mb-4">6. Order Confirmation</h2>
                             <p class="mb-4">After a successful purchase, you will receive:</p>
                             <ul class="list-disc pl-6 space-y-2">
                                 <li><strong class="text-white">Order Confirmation Email:</strong> With order ID, items purchased, and payment details</li>
@@ -320,7 +238,7 @@ const companyInfo = {
                         </section>
 
                         <section>
-                            <h2 class="text-2xl font-bold text-white mb-4">8. Payment and Delivery</h2>
+                            <h2 class="text-2xl font-bold text-white mb-4">7. Payment and Service Delivery</h2>
                             
                             <div class="bg-blue-900/20 border border-blue-600/30 rounded-lg p-6">
                                 <h3 class="text-xl font-bold text-blue-300 mb-3">Payment Gateway</h3>
@@ -328,17 +246,17 @@ const companyInfo = {
                                     All payments are processed securely through <strong>PhonePe Payment Gateway</strong>. Delivery of products/services will commence only after successful payment confirmation.
                                 </p>
                                 <ul class="list-disc pl-6 space-y-1 text-blue-100">
-                                    <li>Digital products: Delivered after payment confirmation</li>
-                                    <li>Services: Scheduled after payment confirmation</li>
-                                    <li>Physical products: Dispatched after payment confirmation</li>
+                                    <li>Consulting services: Scheduled after payment confirmation</li>
+                                    <li>SaaS development: Project kickoff within 3-5 business days</li>
+                                    <li>AI agent deployment: Initiated immediately after requirements gathering</li>
                                 </ul>
                             </div>
                         </section>
 
                         <section>
-                            <h2 class="text-2xl font-bold text-white mb-4">9. Contact Information</h2>
+                            <h2 class="text-2xl font-bold text-white mb-4">8. Contact Information</h2>
                             <div class="bg-purple-900/20 border border-purple-600/30 rounded-lg p-6">
-                                <h3 class="text-xl font-bold text-white mb-4">For Delivery/Shipping Queries</h3>
+                                <h3 class="text-xl font-bold text-white mb-4">For Service Delivery Queries</h3>
                                 
                                 <div class="grid md:grid-cols-2 gap-6">
                                     <div>
@@ -364,7 +282,7 @@ const companyInfo = {
                         </section>
 
                         <section>
-                            <h2 class="text-2xl font-bold text-white mb-4">10. Related Policies</h2>
+                            <h2 class="text-2xl font-bold text-white mb-4">9. Related Policies</h2>
                             <p class="mb-4">Please also review our other policies:</p>
                             <ul class="list-disc pl-6 space-y-2">
                                 <li><a href="/refund-policy" class="text-purple-400 hover:text-purple-300">Refund and Cancellation Policy</a></li>

@@ -144,8 +144,6 @@ export const POST: APIRoute = async ({ request }) => {
                 }
             );
         }
-
-        // Return success response with checkout URL
         return new Response(
             JSON.stringify({
                 success: true,

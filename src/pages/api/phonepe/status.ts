@@ -1,13 +1,8 @@
 import type { APIRoute } from 'astro';
 import { getPhonePeConfig, getAccessToken, getPhonePeHeaders } from '../../../lib/phonepe-utils';
 
-// Mark this endpoint as server-rendered
 export const prerender = false;
 
-/**
- * API Endpoint: GET /api/phonepe/status?orderId=ORDER_123
- * Purpose: Check payment status from PhonePe
- */
 export const GET: APIRoute = async ({ url }) => {
     console.log('=== PhonePe Payment Status Check API Called ===');
 
