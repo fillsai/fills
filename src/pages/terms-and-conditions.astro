@@ -81,17 +81,46 @@ const companyInfo = {
                             </ul>
                         </section>
 
+                        <!-- Business Type Notice -->
+                        <div class="bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-blue-500/30 rounded-lg p-6 mb-8">
+                            <div class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-blue-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                                <div>
+                                    <h3 class="text-lg font-bold text-blue-300 mb-2">Business Type: 100% Digital Services</h3>
+                                    <p class="text-blue-100 text-sm">
+                                        {companyInfo.name} is a digital services company. We provide software consulting and development services delivered remotely—no physical products are sold or shipped.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
                         <section>
                             <h2 class="text-2xl font-bold text-white mb-4">3. Services Offered</h2>
-                            <p class="mb-4">{companyInfo.name} provides the following services:</p>
-                            <ul class="list-disc pl-6 space-y-2 mb-4">
-                                <li><strong>AI Consulting Services:</strong> Strategic consulting for AI implementation and digital transformation</li>
-                                <li><strong>Custom AI Development:</strong> Development of custom AI solutions, models, and applications</li>
-                                <li><strong>AI Agent Deployment:</strong> Design, development, and deployment of AI-powered agents and automation solutions</li>
-                                <li><strong>MVP Development:</strong> Minimum Viable Product development for startups and enterprises</li>
-                                <li><strong>AI Integration:</strong> Integration of AI capabilities into existing systems and workflows</li>
-                                <li><strong>Training & Support:</strong> Technical training and ongoing support services</li>
-                            </ul>
+                            <p class="mb-4">{companyInfo.name} provides the following <strong>digital services</strong>:</p>
+                            
+                            <div class="grid md:grid-cols-3 gap-4 mb-6">
+                                <div class="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
+                                    <h3 class="text-lg font-bold text-purple-300 mb-2">Software Consulting</h3>
+                                    <p class="text-gray-300 text-sm">Strategic technology advisory and software architecture consulting delivered remotely</p>
+                                </div>
+                                <div class="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
+                                    <h3 class="text-lg font-bold text-blue-300 mb-2">SaaS Development</h3>
+                                    <p class="text-gray-300 text-sm">Cloud-based software-as-a-service product development and deployment</p>
+                                </div>
+                                <div class="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+                                    <h3 class="text-lg font-bold text-green-300 mb-2">Healthcare AI Agents</h3>
+                                    <p class="text-gray-300 text-sm">AI-powered healthcare automation solutions deployed via APIs</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-gray-800/50 rounded-lg p-4 border border-gray-700 mb-4">
+                                <p class="text-gray-300 text-sm">
+                                    <strong class="text-white">Service Delivery:</strong> All services are delivered digitally via video conferencing, cloud platforms, code repositories, and online collaboration tools. No physical products, meetings, or deliveries are involved.
+                                </p>
+                            </div>
+
                             <p class="mb-4">
                                 Detailed service descriptions, pricing, and deliverables are provided at the time of purchase or in the service agreement executed between the parties.
                             </p>

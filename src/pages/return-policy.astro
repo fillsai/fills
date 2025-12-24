@@ -54,16 +54,29 @@ const companyInfo = {
                             </div>
                         </div>
 
-                        <!-- Important Notice for Digital Services -->
-                        <div class="bg-blue-900/20 border border-blue-600/30 rounded-lg p-6 mb-8">
-                            <h2 class="text-xl font-bold text-blue-300 mb-3">Important Notice - Digital Services Business</h2>
-                            <p class="text-blue-100 mb-3">
-                                <strong>{companyInfo.name}</strong> primarily provides <strong>digital services and AI consulting solutions</strong>. As our offerings are predominantly digital in nature, the traditional concept of "returns" (as applicable to physical goods) does not directly apply to most of our services.
-                            </p>
-                            <p class="text-blue-100">
-                                This Return Policy primarily addresses the process for exchanges, service remediation, and applicable scenarios where physical products may be involved.
-                            </p>
+                        <!-- Digital Services Notice -->
+                        <div class="bg-blue-900/20 border-l-4 border-blue-500 rounded-r-lg p-6 mb-8">
+                            <div class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-blue-400 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                                </svg>
+                                <div>
+                                    <h3 class="text-lg font-bold text-blue-300 mb-2">Digital Services Business</h3>
+                                    <p class="text-blue-100 mb-2">
+                                        <strong>{companyInfo.name}</strong> provides <strong>100% digital services only</strong>:
+                                    </p>
+                                    <ul class="list-disc pl-5 space-y-1 text-blue-200 text-sm">
+                                        <li>Software Consulting (remote advisory services)</li>
+                                        <li>SaaS Development (cloud-based software)</li>
+                                        <li>Healthcare AI Agents (digital deployment)</li>
+                                    </ul>
+                                    <p class="text-blue-100 mt-3 text-sm">
+                                        <strong>No physical products are sold.</strong> This policy addresses service adjustments and project remediation only.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
+
 
                         <section>
                             <h2 class="text-2xl font-bold text-white mb-4">1. Return/Exchange Window</h2>
@@ -86,19 +99,19 @@ const companyInfo = {
                             
                             <div class="space-y-4">
                                 <div class="border-l-4 border-green-500 pl-4">
-                                    <h3 class="text-lg font-bold text-green-300 mb-2">2.1 Eligible for Return/Exchange</h3>
+                                    <h3 class="text-lg font-bold text-green-300 mb-2">2.1 Eligible for Service Remediation/Exchange</h3>
                                     <ul class="list-disc pl-6 space-y-2">
-                                        <li>
-                                            <strong>Physical Products:</strong> Hardware, printed materials, or merchandise that are defective, damaged, or not as described
-                                        </li>
-                                        <li>
-                                            <strong>Defective Digital Products:</strong> Software or digital products that are corrupted or non-functional due to our error
-                                        </li>
                                         <li>
                                             <strong>Service Errors:</strong> Services that were not delivered as per the agreed specifications
                                         </li>
                                         <li>
+                                            <strong>Technical Issues:</strong> Service delivery prevented due to technical issues on our end
+                                        </li>
+                                        <li>
                                             <strong>Duplicate Purchases:</strong> Accidental duplicate orders (before service delivery)
+                                        </li>
+                                        <li>
+                                            <strong>Service Quality Issues:</strong> Deliverables that don't meet the agreed quality standards
                                         </li>
                                     </ul>
                                 </div>
@@ -136,22 +149,22 @@ const companyInfo = {
                         </section>
 
                         <section>
-                            <h2 class="text-2xl font-bold text-white mb-4">3. Conditions for Return</h2>
+                            <h2 class="text-2xl font-bold text-white mb-4">3. Conditions for Service Remediation</h2>
                             
                             <div class="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
-                                <p class="mb-4">For eligible physical products, returns are accepted only if:</p>
+                                <p class="mb-4">For eligible service remediation requests:</p>
                                 <ul class="list-disc pl-6 space-y-3">
                                     <li>
-                                        <strong class="text-white">Condition:</strong> The product is unused and in the same condition as received
+                                        <strong class="text-white">Timely Reporting:</strong> Issues must be reported within 7 days of service delivery
                                     </li>
                                     <li>
-                                        <strong class="text-white">Packaging:</strong> The product is in its original packaging with all tags and seals intact
+                                        <strong class="text-white">Proof of Purchase:</strong> You must have the original invoice or order confirmation
                                     </li>
                                     <li>
-                                        <strong class="text-white">Accessories:</strong> All included accessories, documentation, and free items are returned
+                                        <strong class="text-white">Specific Issues:</strong> Clearly document the issues or discrepancies
                                     </li>
                                     <li>
-                                        <strong class="text-white">Proof of Purchase:</strong> You have the original invoice or order confirmation
+                                        <strong class="text-white">Good Faith:</strong> Requests made in good faith for legitimate service quality concerns
                                     </li>
                                 </ul>
                             </div>
@@ -171,109 +184,67 @@ const companyInfo = {
                                         <ul class="list-disc pl-6 mt-2 space-y-1 text-gray-300">
                                             <li>Order ID/Transaction ID</li>
                                             <li>Registered email address</li>
-                                            <li>Product/Service name</li>
-                                            <li>Reason for return/exchange</li>
-                                            <li>Photos/evidence of defect or damage (for physical products)</li>
-                                            <li>Preferred resolution (replacement or refund)</li>
+                                            <li>Service name and delivery date</li>
+                                            <li>Specific concerns or issues encountered</li>
+                                            <li>Documentation or evidence of service quality issues</li>
+                                            <li>Preferred resolution (service correction or refund)</li>
                                         </ul>
                                     </li>
                                     <li>
-                                        <strong class="text-white">Await Authorization:</strong> Our team will review your request within 2-3 business days and provide return authorization if approved
+                                        <strong class="text-white">Await Review:</strong> Our team will review your request within 2-3 business days
                                     </li>
                                     <li>
-                                        <strong class="text-white">Ship the Product (if applicable):</strong> For physical products, ship to our address using the instructions provided
+                                        <strong class="text-white">Quality Assessment:</strong> We will review the service delivery against agreed specifications
                                     </li>
                                     <li>
-                                        <strong class="text-white">Quality Check:</strong> We will inspect the returned item upon receipt
-                                    </li>
-                                    <li>
-                                        <strong class="text-white">Resolution:</strong> After verification, we will process your replacement or refund as per your preference
+                                        <strong class="text-white">Resolution:</strong> After verification, we will process your service correction or refund as appropriate
                                     </li>
                                 </ol>
                             </div>
                         </section>
 
                         <section>
-                            <h2 class="text-2xl font-bold text-white mb-4">5. Exchange Process</h2>
+                            <h2 class="text-2xl font-bold text-white mb-4">5. Service Remediation Process</h2>
                             
                             <div class="space-y-4">
                                 <div class="border-l-4 border-purple-500 pl-4">
-                                    <h3 class="text-lg font-bold text-white mb-2">5.1 For Defective/Damaged Products</h3>
-                                    <p class="mb-2">We replace items only if they are defective or damaged upon receipt:</p>
-                                    <ul class="list-disc pl-6 space-y-1">
-                                        <li>Report the issue within 48 hours of delivery with photographic evidence</li>
-                                        <li>We will arrange for collection and replacement at no extra cost</li>
-                                        <li>Replacement will be shipped within 5-7 business days of receiving the returned item</li>
-                                    </ul>
-                                </div>
-
-                                <div class="border-l-4 border-purple-500 pl-4">
-                                    <h3 class="text-lg font-bold text-white mb-2">5.2 For Service Issues</h3>
+                                    <h3 class="text-lg font-bold text-white mb-2">5.1 For Service Quality Issues</h3>
                                     <p class="mb-2">If services do not meet agreed specifications:</p>
                                     <ul class="list-disc pl-6 space-y-1">
                                         <li>Report within 7 days of service delivery with specific concerns</li>
                                         <li>We will review and offer remediation, re-delivery, or credit as appropriate</li>
                                         <li>Resolution timeline will be communicated based on the complexity of the issue</li>
+                                        <li>No additional charges for service correction when the issue is on our end</li>
                                     </ul>
                                 </div>
 
                                 <div class="border-l-4 border-purple-500 pl-4">
-                                    <h3 class="text-lg font-bold text-white mb-2">5.3 Service Upgrades</h3>
+                                    <h3 class="text-lg font-bold text-white mb-2">5.2 Service Upgrades</h3>
                                     <p>You may upgrade to a higher service tier at any time. The price difference will be calculated based on the remaining service period or unused credits.</p>
                                 </div>
                             </div>
                         </section>
 
-                        <section>
-                            <h2 class="text-2xl font-bold text-white mb-4">6. Shipping for Returns</h2>
-                            
-                            <div class="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
-                                <p class="mb-4">For physical products being returned:</p>
-                                <ul class="list-disc pl-6 space-y-2">
-                                    <li>
-                                        <strong class="text-white">Defective/Damaged Items:</strong> Return shipping is free (we arrange pickup or reimburse shipping costs)
-                                    </li>
-                                    <li>
-                                        <strong class="text-white">Change of Mind:</strong> Customer bears return shipping costs
-                                    </li>
-                                    <li>
-                                        <strong class="text-white">Shipping Method:</strong> Use a trackable shipping service or purchase shipping insurance for items over ₹5,000
-                                    </li>
-                                    <li>
-                                        <strong class="text-white">Packaging:</strong> Package items securely to prevent damage during transit
-                                    </li>
-                                </ul>
-                                <div class="bg-yellow-900/20 border border-yellow-600/30 rounded-lg p-4 mt-4">
-                                    <p class="text-yellow-200 text-sm">
-                                        <strong>Note:</strong> We are not responsible for items lost or damaged during return shipping. Keep tracking information until the return is processed.
-                                    </p>
-                                </div>
-                            </div>
-                        </section>
 
                         <section>
-                            <h2 class="text-2xl font-bold text-white mb-4">7. Quality Assurance</h2>
-                            <p class="mb-4">Upon receiving a returned item, our quality assurance team will:</p>
+                            <h2 class="text-2xl font-bold text-white mb-4">6. Quality Review Process</h2>
+                            <p class="mb-4">Upon receiving a service remediation request, our quality assurance team will:</p>
                             <ul class="list-disc pl-6 space-y-2">
-                                <li>Inspect the product/service to verify the reported issue</li>
-                                <li>Confirm eligibility based on return conditions</li>
-                                <li>Document findings for our records</li>
+                                <li>Review the service delivery and reported issues</li>
+                                <li>Confirm eligibility based on service agreement terms</li>
+                                <li>Document findings and proposed resolution</li>
                                 <li>Notify you of the outcome within 2-3 business days</li>
                             </ul>
-                            <p class="mt-4 text-sm text-gray-400">
-                                If the returned item does not meet our return conditions, it will be shipped back to you at your expense.
-                            </p>
                         </section>
 
                         <section>
-                            <h2 class="text-2xl font-bold text-white mb-4">8. Refund After Return</h2>
+                            <h2 class="text-2xl font-bold text-white mb-4">7. Refund After Service Remediation</h2>
                             <p class="mb-4">
-                                If you are eligible for a refund after returning an item:
+                                If you are eligible for a refund after service review:
                             </p>
                             <ul class="list-disc pl-6 space-y-2">
-                                <li>Refunds are processed within 5-7 business days after we receive and inspect the returned item</li>
+                                <li>Refunds are processed within 5-7 business days after completing our review</li>
                                 <li>Refunds are credited to the original payment method via <strong>PhonePe Payment Gateway</strong></li>
-                                <li>Original shipping charges are non-refundable (unless the return is due to our error)</li>
                                 <li>Please refer to our <a href="/refund-policy" class="text-purple-400 hover:text-purple-300">Refund Policy</a> for complete details</li>
                             </ul>
                         </section>
