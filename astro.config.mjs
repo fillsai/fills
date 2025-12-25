@@ -11,8 +11,7 @@ import vercel from "@astrojs/vercel/serverless";
 
 // https://astro.build/config
 export default defineConfig({
-  site: process.env.PUBLIC_SITE_URL || "http://localhost:4321",
-  site: "https://ultimate-astro-template.vercel.app/",
+  site: process.env.PUBLIC_SITE_URL || "https://www.fills.ai",
   output: "server",
   adapter: vercel({}),
   integrations: [

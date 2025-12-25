@@ -1,12 +1,14 @@
 /**
  * PhonePe Payment Gateway Utility Functions
- * Based on official PhonePe PG Checkout API documentation
+ * OAuth-based Authentication for Production
+ * Official Documentation: https://developer.phonepe.com/
  */
 
 export interface PhonePeConfig {
     clientId: string;
     clientSecret: string;
     clientVersion: string;
+    oauthUrl: string;
     apiBaseUrl: string;
 }
 
@@ -20,32 +22,31 @@ export interface PaymentPayload {
     merchantOrderId: string;
     amount: number;
     redirectUrl: string;
-    redirectMode?: string;
-    callbackUrl?: string;
     message?: string;
 }
 
-// Cache for OAuth token to avoid requesting new token for every API call
+// Cache for OAuth token
 let cachedToken: { token: string; expiresAt: number } | null = null;
 
 /**
  * Get PhonePe configuration from environment variables
  */
 export function getPhonePeConfig(): PhonePeConfig {
-    // In server-side environments, we use process.env or import.meta.env
     const clientId = process.env.PHONEPE_CLIENT_ID || import.meta.env.PHONEPE_CLIENT_ID;
     const clientSecret = process.env.PHONEPE_CLIENT_SECRET || import.meta.env.PHONEPE_CLIENT_SECRET;
     const clientVersion = process.env.PHONEPE_CLIENT_VERSION || import.meta.env.PHONEPE_CLIENT_VERSION || '1';
-    const apiBaseUrl = process.env.PHONEPE_API_BASE_URL || import.meta.env.PHONEPE_API_BASE_URL;
+    const oauthUrl = process.env.PHONEPE_OAUTH_URL || import.meta.env.PHONEPE_OAUTH_URL || 'https://api.phonepe.com/apis/identity-manager/v1/oauth/token';
+    const apiBaseUrl = process.env.PHONEPE_API_BASE_URL || import.meta.env.PHONEPE_API_BASE_URL || 'https://api.phonepe.com/apis/pg';
 
-    if (!clientId || !clientSecret || !apiBaseUrl) {
-        throw new Error('PhonePe configuration is missing. Required: PHONEPE_CLIENT_ID, PHONEPE_CLIENT_SECRET, PHONEPE_API_BASE_URL');
+    if (!clientId || !clientSecret) {
+        throw new Error('PhonePe configuration missing: PHONEPE_CLIENT_ID and PHONEPE_CLIENT_SECRET required');
     }
 
     return {
         clientId,
         clientSecret,
         clientVersion,
+        oauthUrl,
         apiBaseUrl,
     };
 }
@@ -54,15 +55,13 @@ export function getPhonePeConfig(): PhonePeConfig {
  * Get OAuth Access Token from PhonePe
  */
 export async function getAccessToken(config: PhonePeConfig): Promise<string> {
-    // Check if we have a valid cached token
-    if (cachedToken && cachedToken.expiresAt > Date.now() + 60000) { // 1 minute buffer
-        console.log('Using cached OAuth token');
+    // Check cached token
+    if (cachedToken && cachedToken.expiresAt > Date.now() + 60000) {
+        console.log('✓ Using cached OAuth token');
         return cachedToken.token;
     }
 
-    console.log('Requesting new OAuth token from PhonePe...');
-
-    const tokenUrl = `${config.apiBaseUrl}/v1/oauth/token`;
+    console.log('→ Requesting new OAuth token...');
 
     const formData = new URLSearchParams();
     formData.append('client_id', config.clientId);
@@ -70,7 +69,7 @@ export async function getAccessToken(config: PhonePeConfig): Promise<string> {
     formData.append('client_version', config.clientVersion);
     formData.append('grant_type', 'client_credentials');
 
-    const response = await fetch(tokenUrl, {
+    const response = await fetch(config.oauthUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -78,23 +77,25 @@ export async function getAccessToken(config: PhonePeConfig): Promise<string> {
         body: formData.toString(),
     });
 
-    const responseText = await response.text();
     if (!response.ok) {
-        throw new Error(`Failed to get OAuth token: ${response.status} - ${responseText}`);
+        const errorText = await response.text();
+        throw new Error(`OAuth failed: ${response.status} - ${errorText}`);
     }
 
-    const tokenData: OAuthTokenResponse = JSON.parse(responseText);
-    if (!tokenData.access_token) {
+    const data: OAuthTokenResponse = await response.json();
+    
+    if (!data.access_token) {
         throw new Error('No access_token in OAuth response');
     }
 
-    // Cache the token
+    // Cache token
     cachedToken = {
-        token: tokenData.access_token,
-        expiresAt: tokenData.expires_at * 1000, // Convert seconds to milliseconds
+        token: data.access_token,
+        expiresAt: data.expires_at * 1000,
     };
 
-    return tokenData.access_token;
+    console.log('✓ OAuth token obtained');
+    return data.access_token;
 }
 
 /**
@@ -103,17 +104,17 @@ export async function getAccessToken(config: PhonePeConfig): Promise<string> {
 export function generateMerchantOrderId(): string {
     const timestamp = Date.now();
     const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
-    return `ORDER_${timestamp}_${random}`;
+    return `ORD${timestamp}${random}`;
 }
 
 /**
- * Create payment payload for PhonePe PG Checkout API
+ * Create payment payload
  */
 export function createPaymentPayload(params: PaymentPayload) {
     return {
         merchantOrderId: params.merchantOrderId,
         amount: params.amount,
-        expireAfter: 1200, // 20 minutes
+        expireAfter: 1200,
         metaInfo: {
             udf1: 'FILLS_AI_PAYMENT',
             udf2: params.merchantOrderId,
@@ -123,14 +124,14 @@ export function createPaymentPayload(params: PaymentPayload) {
             message: params.message || 'Payment for FILLS AI Services',
             merchantUrls: {
                 redirectUrl: params.redirectUrl,
-                callbackUrl: params.callbackUrl || params.redirectUrl,
+                callbackUrl: params.redirectUrl,
             },
         },
     };
 }
 
 /**
- * Validate amount (must be positive number)
+ * Validate amount
  */
 export function validateAmount(amount: number): boolean {
     return typeof amount === 'number' && amount > 0;
@@ -157,11 +158,12 @@ export function getPhonePeHeaders(accessToken: string): HeadersInit {
     return {
         'Content-Type': 'application/json',
         'Authorization': `O-Bearer ${accessToken}`,
+        'accept': 'application/json',
     };
 }
 
 /**
- * Clear cached token
+ * Clear cached token (useful for testing)
  */
 export function clearTokenCache(): void {
     cachedToken = null;

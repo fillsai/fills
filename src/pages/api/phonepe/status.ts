@@ -3,8 +3,12 @@ import { getPhonePeConfig, getAccessToken, getPhonePeHeaders } from '../../../li
 
 export const prerender = false;
 
+/**
+ * API Endpoint: GET /api/phonepe/status?orderId=xxx
+ * Purpose: Check PhonePe payment status (OAuth-based authentication)
+ */
 export const GET: APIRoute = async ({ url }) => {
-    console.log('=== PhonePe Payment Status Check API Called ===');
+    console.log('\n=== PhonePe Payment Status Check ===');
 
     try {
         const orderId = url.searchParams.get('orderId');
@@ -13,81 +17,69 @@ export const GET: APIRoute = async ({ url }) => {
             return new Response(
                 JSON.stringify({
                     success: false,
-                    error: 'Order ID is required',
+                    error: 'Order ID required',
                 }),
-                {
-                    status: 400,
-                    headers: { 'Content-Type': 'application/json' },
-                }
+                { status: 400, headers: { 'Content-Type': 'application/json' } }
             );
         }
 
-        console.log('Checking status for Order ID:', orderId);
+        console.log('Checking status for:', orderId);
 
-        // Get PhonePe configuration
+        // Get config
         const config = getPhonePeConfig();
 
-        // Get OAuth Access Token
+        // Get OAuth token
         const accessToken = await getAccessToken(config);
 
-        // Get headers with OAuth Bearer token
+        // Call status API
+        const apiUrl = `${config.apiBaseUrl}/checkout/v2/order/${orderId}/status`;
+        console.log('API URL:', apiUrl);
+
         const headers = getPhonePeHeaders(accessToken);
 
-        // PhonePe order status API endpoint
-        const apiUrl = `${config.apiBaseUrl}/checkout/v2/order/${orderId}/status`;
-        console.log('Calling PhonePe Status API:', apiUrl);
-
-        // Call PhonePe status check API
         const phonePeResponse = await fetch(apiUrl, {
             method: 'GET',
             headers,
         });
 
         const responseText = await phonePeResponse.text();
-        console.log('PhonePe status raw response:', responseText);
+        console.log('Response Status:', phonePeResponse.status);
+        console.log('Response:', responseText);
 
         let responseData;
         try {
             responseData = JSON.parse(responseText);
         } catch (e) {
-            console.error('Failed to parse PhonePe status response:', e);
+            console.error('Parse error:', e);
             return new Response(
                 JSON.stringify({
                     success: false,
                     error: 'Invalid response from PhonePe',
                     rawResponse: responseText,
                 }),
-                {
-                    status: 500,
-                    headers: { 'Content-Type': 'application/json' },
-                }
+                { status: 500, headers: { 'Content-Type': 'application/json' } }
             );
         }
 
-        console.log('PhonePe status parsed response:', JSON.stringify(responseData, null, 2));
-        // Return success response with status data
+        console.log('✓ Status check completed');
+
         return new Response(
             JSON.stringify({
                 success: true,
                 data: responseData,
             }),
-            {
-                status: 200,
-                headers: { 'Content-Type': 'application/json' },
-            }
+            { status: 200, headers: { 'Content-Type': 'application/json' } }
         );
+
     } catch (error) {
-        console.error('Payment status check error:', error);
+        console.error('Error:', error);
         return new Response(
             JSON.stringify({
                 success: false,
                 error: 'Internal server error',
                 message: error instanceof Error ? error.message : 'Unknown error',
             }),
-            {
-                status: 500,
-                headers: { 'Content-Type': 'application/json' },
-            }
+            { status: 500, headers: { 'Content-Type': 'application/json' } }
         );
     }
 };
