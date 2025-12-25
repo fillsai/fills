@@ -57,11 +57,8 @@ export function getPhonePeConfig(): PhonePeConfig {
 export async function getAccessToken(config: PhonePeConfig): Promise<string> {
     // Check cached token
     if (cachedToken && cachedToken.expiresAt > Date.now() + 60000) {
-        console.log('✓ Using cached OAuth token');
         return cachedToken.token;
     }
-
-    console.log('→ Requesting new OAuth token...');
 
     const formData = new URLSearchParams();
     formData.append('client_id', config.clientId);
@@ -94,7 +91,6 @@ export async function getAccessToken(config: PhonePeConfig): Promise<string> {
         expiresAt: data.expires_at * 1000,
     };
 
-    console.log('✓ OAuth token obtained');
     return data.access_token;
 }
 

@@ -16,13 +16,9 @@ export const prerender = false;
  * Purpose: Initiate PhonePe payment (OAuth-based authentication)
  */
 export const POST: APIRoute = async ({ request }) => {
-    console.log('\n=== PhonePe Payment Initiation ===');
-
     try {
         const body = await request.json();
         const { amount, redirectUrl } = body;
-
-        console.log('Amount:', amount, 'Redirect:', redirectUrl);
 
         // Validate amount
         if (!amount || !validateAmount(amount)) {
@@ -53,7 +49,6 @@ export const POST: APIRoute = async ({ request }) => {
 
         // Generate order ID
         const merchantOrderId = generateMerchantOrderId();
-        console.log('Order ID:', merchantOrderId);
 
         // Convert to paise
         const amountInPaise = rupeesToPaise(amount);
@@ -68,8 +63,6 @@ export const POST: APIRoute = async ({ request }) => {
 
         // Call PhonePe API
         const apiUrl = `${config.apiBaseUrl}/checkout/v2/pay`;
-        console.log('API URL:', apiUrl);
-
         const headers = getPhonePeHeaders(accessToken);
 
         const phonePeResponse = await fetch(apiUrl, {
@@ -79,14 +72,11 @@ export const POST: APIRoute = async ({ request }) => {
         });
 
         const responseText = await phonePeResponse.text();
-        console.log('Response Status:', phonePeResponse.status);
-        console.log('Response:', responseText);
 
         let responseData;
         try {
             responseData = JSON.parse(responseText);
         } catch (e) {
-            console.error('Parse error:', e);
             return new Response(
                 JSON.stringify({
                     success: false,
@@ -99,7 +89,6 @@ export const POST: APIRoute = async ({ request }) => {
 
         // Check success
         if (!phonePeResponse.ok || responseData.errorCode) {
-            console.error('PhonePe error:', responseData);
             return new Response(
                 JSON.stringify({
                     success: false,
@@ -118,7 +107,6 @@ export const POST: APIRoute = async ({ request }) => {
             responseData.data?.redirectUrl;
 
         if (!checkoutUrl) {
-            console.error('No checkout URL');
             return new Response(
                 JSON.stringify({
                     success: false,
@@ -128,9 +116,6 @@ export const POST: APIRoute = async ({ request }) => {
                 { status: 500, headers: { 'Content-Type': 'application/json' } }
             );
         }
-
-        console.log('✓ Payment initiated successfully');
-        console.log('Checkout URL:', checkoutUrl);
 
         return new Response(
             JSON.stringify({
@@ -144,7 +129,6 @@ export const POST: APIRoute = async ({ request }) => {
         );
 
     } catch (error) {
-        console.error('Error:', error);
         return new Response(
             JSON.stringify({
                 success: false,

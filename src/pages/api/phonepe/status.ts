@@ -8,8 +8,6 @@ export const prerender = false;
  * Purpose: Check PhonePe payment status (OAuth-based authentication)
  */
 export const GET: APIRoute = async ({ url }) => {
-    console.log('\n=== PhonePe Payment Status Check ===');
-
     try {
         const orderId = url.searchParams.get('orderId');
 
@@ -23,8 +21,6 @@ export const GET: APIRoute = async ({ url }) => {
             );
         }
 
-        console.log('Checking status for:', orderId);
-
         // Get config
         const config = getPhonePeConfig();
 
@@ -33,8 +29,6 @@ export const GET: APIRoute = async ({ url }) => {
 
         // Call status API
         const apiUrl = `${config.apiBaseUrl}/checkout/v2/order/${orderId}/status`;
-        console.log('API URL:', apiUrl);
-
         const headers = getPhonePeHeaders(accessToken);
 
         const phonePeResponse = await fetch(apiUrl, {
@@ -43,14 +37,11 @@ export const GET: APIRoute = async ({ url }) => {
         });
 
         const responseText = await phonePeResponse.text();
-        console.log('Response Status:', phonePeResponse.status);
-        console.log('Response:', responseText);
 
         let responseData;
         try {
             responseData = JSON.parse(responseText);
         } catch (e) {
-            console.error('Parse error:', e);
             return new Response(
                 JSON.stringify({
                     success: false,
@@ -61,8 +52,6 @@ export const GET: APIRoute = async ({ url }) => {
             );
         }
 
-        console.log('✓ Status check completed');
-
         return new Response(
             JSON.stringify({
                 success: true,
@@ -72,7 +61,6 @@ export const GET: APIRoute = async ({ url }) => {
         );
 
     } catch (error) {
-        console.error('Error:', error);
         return new Response(
             JSON.stringify({
                 success: false,

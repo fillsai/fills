@@ -124,7 +124,6 @@ const InteractiveShowcase: React.FC = () => {
       // Scroll to bottom after message is added
       setTimeout(scrollToBottom, 100);
     } catch (error) {
-      console.error('Error getting AI response:', error);
       // Add error message
       const errorMessage: Message = {
         id: messages.length + 2,

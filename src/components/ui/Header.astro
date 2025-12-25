@@ -179,7 +179,6 @@ const stars = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${REPO_NA
         const body = document.body;
 
         if (!button || !closeButton || !menu || !button.parentNode || !closeButton.parentNode) {
-            console.warn('Mobile menu elements not found');
             return;
         }
 
