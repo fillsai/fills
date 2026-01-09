@@ -20,8 +20,10 @@ export interface OAuthTokenResponse {
 
 export interface PaymentPayload {
     merchantOrderId: string;
+    merchantUserId: string;
     amount: number;
     redirectUrl: string;
+    callbackUrl: string;
     message?: string;
 }
 
@@ -104,24 +106,20 @@ export function generateMerchantOrderId(): string {
 }
 
 /**
- * Create payment payload
+ * Create payment payload for PhonePe PG OAuth API
+ * Official Docs: https://developer.phonepe.com/v1/reference/pay-api-1
  */
 export function createPaymentPayload(params: PaymentPayload) {
     return {
         merchantOrderId: params.merchantOrderId,
+        merchantUserId: params.merchantUserId,
         amount: params.amount,
+        message: params.message || 'Payment for FILLS AI Services',
+        redirectUrl: params.redirectUrl,
+        callbackUrl: params.callbackUrl,
         expireAfter: 1200,
-        metaInfo: {
-            udf1: 'FILLS_AI_PAYMENT',
-            udf2: params.merchantOrderId,
-        },
         paymentFlow: {
             type: 'PG_CHECKOUT',
-            message: params.message || 'Payment for FILLS AI Services',
-            merchantUrls: {
-                redirectUrl: params.redirectUrl,
-                callbackUrl: params.redirectUrl,
-            },
         },
     };
 }

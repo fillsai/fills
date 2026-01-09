@@ -47,23 +47,35 @@ export const POST: APIRoute = async ({ request }) => {
         // Get OAuth token
         const accessToken = await getAccessToken(config);
 
-        // Generate order ID
+      
         const merchantOrderId = generateMerchantOrderId();
 
-        // Convert to paise
+    
         const amountInPaise = rupeesToPaise(amount);
 
-        // Create payload
+        const webhookUrl = process.env.PHONEPE_WEBHOOK_URL || import.meta.env.PHONEPE_WEBHOOK_URL || `${new URL(request.url).origin}/api/phonepe/webhook`;
+
         const paymentPayload = createPaymentPayload({
             merchantOrderId,
+            merchantUserId: `USER_${Date.now()}`,
             amount: amountInPaise,
             redirectUrl,
+            callbackUrl: webhookUrl, // Webhook URL for server-to-server notifications
             message: `Payment for FILLS AI - Order ${merchantOrderId}`,
         });
 
         // Call PhonePe API
         const apiUrl = `${config.apiBaseUrl}/checkout/v2/pay`;
         const headers = getPhonePeHeaders(accessToken);
+
+        // Log request details for debugging (safe for production - no secrets)
+        console.log('[PhonePe] Initiating payment:', {
+            orderId: merchantOrderId,
+            amount: amountInPaise,
+            redirectUrl,
+            callbackUrl: webhookUrl,
+            apiUrl,
+        });
 
         const phonePeResponse = await fetch(apiUrl, {
             method: 'POST',
@@ -72,6 +84,12 @@ export const POST: APIRoute = async ({ request }) => {
         });
 
         const responseText = await phonePeResponse.text();
+
+        // Log response status
+        console.log('[PhonePe] Response:', {
+            status: phonePeResponse.status,
+            statusText: phonePeResponse.statusText,
+        });
 
         let responseData;
         try {
@@ -82,6 +100,9 @@ export const POST: APIRoute = async ({ request }) => {
                     success: false,
                     error: 'Invalid response from PhonePe',
                     rawResponse: responseText,
+                    statusCode: phonePeResponse.status,
+                    requestUrl: apiUrl,
+                    requestPayload: paymentPayload,
                 }),
                 { status: 500, headers: { 'Content-Type': 'application/json' } }
             );
@@ -94,7 +115,10 @@ export const POST: APIRoute = async ({ request }) => {
                     success: false,
                     error: responseData.message || responseData.error || 'Payment initiation failed',
                     code: responseData.code || responseData.errorCode,
-                    details: responseData,
+                    statusCode: phonePeResponse.status,
+                    requestUrl: apiUrl,
+                    requestPayload: paymentPayload,
+                    phonePeResponse: responseData,
                 }),
                 { status: phonePeResponse.status || 400, headers: { 'Content-Type': 'application/json' } }
             );
